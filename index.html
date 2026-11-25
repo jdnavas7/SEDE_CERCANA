@@ -3,140 +3,553 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Centros más cercanos · Barcelona</title>
+<title>Centros y ofertas · Barcelona</title>
 <style>
-:root{--bg:#f4f5f7;--card:#fff;--ink:#1b1f27;--muted:#6a7280;--line:#e2e5ea;--brand:#d3001c;--soft:#fde8eb;--ok:#0f8a4b;--okb:#e3f6ec}
-@media(prefers-color-scheme:dark){:root{--bg:#12141a;--card:#1b1f27;--ink:#eceef3;--muted:#98a0ae;--line:#2d333f;--brand:#ff3b52;--soft:#3a1a20;--ok:#3ccf85;--okb:#12301f}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:760px;margin:0 auto;padding:22px 16px 60px}
-h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);font-size:14px}
-.search{display:flex;gap:8px;margin:16px 0 8px}
-input{flex:1;min-width:0;font:inherit;color:inherit;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:13px 14px}
-input:focus{outline:0;border-color:var(--brand)}
-button{font:inherit;font-weight:700;border:0;border-radius:12px;padding:0 20px;background:var(--brand);color:#fff;cursor:pointer}
-#sug{position:absolute;left:0;right:0;top:100%;margin-top:-4px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:10;overflow:hidden;display:none}
-#sug div{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--line)}
-#sug div:last-child{border:0}
-#sug div:hover,#sug div.on{background:var(--soft)}
-#sug small{color:var(--muted);margin-left:6px}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
-.chips button{background:var(--card);color:var(--ink);border:1px solid var(--line);padding:5px 11px;border-radius:99px;font-weight:600;font-size:13px}
-.chips button:hover{border-color:var(--brand);color:var(--brand)}
-.res h2{font-size:15px;margin:0 0 10px;color:var(--muted);font-weight:600}
-.c{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px;display:grid;grid-template-columns:1fr auto;gap:4px 14px;align-items:center}
-.c.first{border-color:var(--ok);background:linear-gradient(var(--okb),var(--card) 70px)}
-.c b{font-size:17px}.min{font-size:26px;font-weight:800;text-align:right;line-height:1}
-.min small{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-top:3px}
-.emp{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
-.emp span{background:var(--soft);color:var(--brand);border-radius:99px;font-size:12px;font-weight:700;padding:1px 9px}
-.meta{grid-column:1/-1;font-size:13px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
-.meta a{color:var(--brand)}
-.badge{font-size:11px;background:var(--ok);color:#fff;border-radius:99px;padding:1px 8px;margin-left:6px;vertical-align:2px}
-.note{font-size:12.5px;color:var(--muted);margin-top:16px}
-.err{color:var(--brand);font-weight:600}
+:root{--bg:#f7f7f4;--panel:#fff;--ink:#14141a;--mut:#6b6b76;--line:#e7e7ea;--soft:#f3f3f6;--acc:#e5173f;--acc-ink:#fff;--ok:#0f9d58;--okbg:#e2f6eb;--warn:#b45309;--warnbg:#fff0cf;--c:#e5173f}
+@media(prefers-color-scheme:dark){:root{--bg:#101014;--panel:#1a1a20;--ink:#f1f1f4;--mut:#9a9aa6;--line:#2c2c35;--soft:#23232b;--acc:#ff4d6d;--ok:#3ddc84;--okbg:#14301f;--warn:#ffb74d;--warnbg:#3a2c10}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--acc)}
+header{background:var(--panel);border-bottom:1px solid var(--line)}
+.top{max-width:1180px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.top h1{margin:0;padding:14px 0;font-size:18px;font-weight:700;display:flex;align-items:center;gap:10px}
+.top h1::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--acc);display:inline-block}
+.top h1 span{font-weight:400;color:var(--mut);font-size:14px}
+nav{display:flex;gap:4px;margin-left:24px}
+nav button{background:none;border:0;color:var(--mut);padding:18px 12px 15px;font-weight:600;border-bottom:3px solid transparent}
+nav button:hover{color:var(--ink)}
+nav button.on{color:var(--ink);border-bottom-color:var(--acc)}
+.who{margin-left:auto;display:flex;gap:10px;align-items:center;font-size:13px}
+.dotc{width:9px;height:9px;border-radius:50%;background:#aaa;display:inline-block;margin-right:6px}
+.dotc.ok{background:var(--ok)}.dotc.warn{background:#f59e0b}
+.seed{display:none;background:var(--warnbg);color:var(--warn);padding:10px 16px;text-align:center;font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:22px 16px 70px}
+.view{display:none}.view.on{display:block}
+.cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px;align-items:start}
+@media(max-width:860px){.cols{grid-template-columns:1fr}.top nav{margin-left:0;order:3;width:100%}nav button{padding:8px 12px}.who{margin-left:auto}}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:20px}
+.box h2{margin:0 0 12px;font-size:15px;font-weight:700;display:flex;gap:10px;align-items:center}
+.box h2 i{font-style:normal;background:var(--acc);color:#fff;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px}
+.hint{color:var(--mut);font-size:13px}
+.sw{position:relative}
+.sform{display:flex;gap:8px}
+.sform input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:10px;padding:11px 14px;background:var(--panel);font-size:16px}
+.sform input:focus{outline:0;border-color:var(--acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 18%,transparent)}
+.btn{border:1.5px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 14px;font-weight:600}
+.btn:hover{border-color:var(--ink)}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.btn.pri:hover{filter:brightness(.92)}
+.btn.sm{padding:3px 11px;font-size:13px;border-radius:8px}
+#sug{position:absolute;left:0;right:0;top:calc(100% + 4px);background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:20;display:none;max-height:260px;overflow:auto}
+#sug div{padding:9px 14px;cursor:pointer}
+#sug div:hover{background:var(--soft)}
+.quick{margin-top:14px}
+.zbs{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
+.zb{border:1.5px solid var(--line);background:var(--panel);border-radius:99px;padding:5px 13px;font-weight:600;font-size:13.5px}
+.zb:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.clist{margin-top:8px}
+.crow{display:grid;grid-template-columns:26px 1fr auto;gap:2px 10px;align-items:center;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+.crow:hover{border-color:var(--mut)}
+.crow.sel{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 6%,var(--panel))}
+.rk{color:var(--mut);font-weight:700;text-align:center}
+.cn{font-weight:700}.cn small{font-weight:400;color:var(--mut);margin-left:6px}
+.min{text-align:right;font-size:26px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;color:var(--ok)}
+.min.a{color:#e08600}.min.r{color:var(--acc)}
+.min small{font-size:12px;font-weight:500;color:var(--mut);margin-left:3px}
+.min em{display:block;font-style:normal;font-size:12px;font-weight:400;color:var(--mut);margin-top:3px}
+.csub{grid-column:2/4;font-size:13px;color:var(--mut);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.eb{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--ink)}
+.eb::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
+.tagp{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--warnbg);color:var(--warn);white-space:nowrap}
+.tagp.ok{background:var(--okbg);color:var(--ok)}
+.orow{display:block;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--line);border-left:6px solid var(--c);border-radius:12px;padding:14px 16px;margin-top:10px}
+.orow:hover{border-color:var(--c)}
+.orow b{font-size:17px}
+.orow .go{float:right;color:var(--c);font-weight:700;font-size:13px}
+.orow div{font-size:13.5px;color:var(--mut);margin-top:2px}
+.empty{color:var(--mut);padding:14px 0}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.toolbar input,.toolbar select{border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--panel);min-width:0}
+.toolbar label{font-size:14px;display:flex;gap:6px;align-items:center}
+.seg{display:flex;background:var(--soft);border-radius:10px;padding:3px}
+.seg button{border:0;background:none;padding:6px 16px;font-weight:700;border-radius:8px;color:var(--mut)}
+.seg button.on{background:var(--panel);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.sum{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.sum div{font-size:13px;color:var(--mut);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 18px}.sum b{display:block;font-size:26px;color:var(--ink);line-height:1.1}
+.sum div:nth-child(1) b{color:var(--acc)}.sum div:nth-child(2) b{color:#e08600}
+table{width:100%;border-collapse:separate;border-spacing:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;text-align:left;color:var(--mut);padding:10px 14px;border-bottom:1px solid var(--line);background:var(--soft)}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tr.r{cursor:pointer}tr.r:hover td{background:var(--soft)}
+td small{display:block;color:var(--mut);font-size:12.5px}
+.bar{height:6px;background:var(--soft);border-radius:99px;min-width:80px;margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);border-radius:99px}
+.bar.done i{background:var(--ok)}
+@media(max-width:760px){
+ table,thead,tbody,tr,td{display:block}thead{display:none}
+ tr.r{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin-bottom:10px;padding:6px 0}
+ td{border:0;padding:4px 14px}td[data-l]::before{content:attr(data-l)": ";color:var(--mut);font-size:12px}
+ table{border:0;background:none}
+}
+#ov{position:fixed;inset:0;background:rgba(10,10,20,.45);display:none;z-index:50}
+#dr{position:fixed;top:0;right:0;bottom:0;width:min(600px,100%);background:var(--panel);z-index:51;transform:translateX(105%);transition:transform .2s;overflow:auto;box-shadow:-8px 0 30px rgba(0,0,0,.2)}
+body.open #ov{display:block}body.open #dr{transform:none}
+.dh{position:sticky;top:0;background:var(--panel);padding:18px 24px 12px;border-top:6px solid var(--c);border-bottom:1px solid var(--line);z-index:2}
+.dh h3{margin:0;font-size:22px}.dh .hint{margin-top:2px}
+.x{position:absolute;right:14px;top:16px;border:0;background:none;font-size:28px;line-height:1;color:var(--mut)}
+.db{padding:6px 24px 34px}
+.sec{margin-top:22px}
+.sec h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--c)}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:7px 14px}
+.kv dt{color:var(--mut);font-size:14px}.kv dd{margin:0}
+ul.l{margin:0;padding-left:18px}ul.l li{margin:3px 0}
+.key{background:var(--warnbg);color:var(--warn);padding:10px 14px;border-radius:10px;font-weight:700;margin-top:16px}
+.mod{display:grid;grid-template-columns:64px 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.mod div{padding:8px 12px;border-bottom:1px solid var(--line)}.mod div:nth-last-child(-n+2){border-bottom:0}
+.mod .h{font-weight:800;background:var(--soft);color:var(--c)}
+.ped{border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.ped.done{background:var(--okbg);border-color:transparent}
+.ph{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.cnt{display:flex;align-items:center;gap:10px;margin:8px 0 4px}
+.cnt button{width:36px;height:36px;border:1.5px solid var(--line);background:var(--panel);border-radius:50%;font-size:20px;line-height:1;font-weight:700}
+.cnt button:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.cnt span{font-size:24px;font-weight:800;min-width:70px;text-align:center;font-variant-numeric:tabular-nums}
+.cnt span small{font-size:14px;color:var(--mut);font-weight:500}
+.pf{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.pf label{font-size:12px;color:var(--mut);display:block;margin-bottom:2px}
+.pf input,.pf select{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:7px 10px;background:var(--panel)}
+.pf .f{grid-column:1/-1}
+.pf textarea{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:7px 10px;background:var(--panel);resize:vertical}
+.arow{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.arow:last-child{border-bottom:0}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.foot{margin-top:28px;font-size:13px;color:var(--mut)}
+.foot a{cursor:pointer;margin-right:14px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;z-index:99;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.modal{position:fixed;inset:0;background:rgba(10,10,20,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:90}
+.modal.on{display:flex}
+.sheet{background:var(--panel);border-radius:16px;padding:24px;width:min(380px,100%)}
+.sheet h2{margin:0 0 4px}
+.sheet input{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--panel);margin-top:4px}
+.sheet label{display:block;margin-top:12px;font-size:12px;color:var(--mut)}
 </style>
 </head>
-<body><div class="wrap">
-<h1>📍 Centros de trabajo más cercanos</h1>
-<div class="sub">Escribe el barrio, ciudad o pueblo donde vive el candidato (Barcelona y alrededores).</div>
-<div style="position:relative"><form class="search" id="f"><input id="q" placeholder="Ej. Sant Andreu, Badalona, Sabadell…" autocomplete="off" autofocus><button>Buscar</button></form><div id="sug"></div></div>
-<div class="chips" id="chips"></div>
-<div class="res" id="res"></div>
-<div class="note">🚗 Minutos en coche sin tráfico (ruta real de OpenStreetMap). «~» = estimación si no hay conexión. Ubicación de los centros aproximada. No se guarda ningún dato.</div>
-</div>
+<body>
+<header><div class="top">
+  <h1>Centros y ofertas<span>Barcelona · Última milla</span></h1>
+  <nav id="nav"><button data-v="buscar" class="on">Buscar por zona</button><button data-v="todas">Todas las ofertas</button><button data-v="admin" id="navAdmin" hidden>Administración</button></nav>
+  <div class="who"><span id="cstat"></span><button class="btn sm" id="btnOut" hidden>Salir</button></div>
+</div></header>
+<div class="modal" id="mLogin"><div class="sheet"><h2>Acceso del equipo</h2><div class="hint">Entra con el usuario que te haya dado el administrador.</div>
+ <label>Correo</label><input id="lMail" type="email" autocomplete="username"><label>Contraseña</label><input id="lPass" type="password" autocomplete="current-password">
+ <div id="lErr" style="color:var(--acc);font-weight:600;margin-top:8px;min-height:20px"></div>
+ <div style="text-align:right;margin-top:8px"><button class="btn pri" id="lGo">Entrar</button></div></div></div>
+
+<main>
+<!-- VISTA 1 -->
+<section class="view on" id="v-buscar">
+ <div class="cols">
+  <div>
+   <div class="box">
+    <h2><i>1</i> Zona donde vive el candidato</h2>
+    <div class="sw"><form class="sform" id="f"><input id="q" placeholder="Barrio, ciudad o pueblo (ej. Sant Andreu, Badalona…)" autocomplete="off"><button class="btn pri">Buscar</button></form><div id="sug"></div></div>
+    <div class="quick"><span class="hint">Zonas habituales</span><div class="zbs" id="quick"></div></div>
+   </div>
+   <div class="box" id="b2" style="display:none">
+    <h2><i>2</i> Centros por cercanía</h2>
+    <div class="hint" id="zinfo"></div>
+    <div class="clist" id="clist"></div>
+    <div class="hint" style="margin-top:8px">Minutos en coche sin tráfico (ruta real). «~» = estimación. Ubicación de los centros aproximada.</div>
+   </div>
+  </div>
+  <div class="box" id="b3">
+   <h2><i>3</i> Ofertas del centro</h2>
+   <div id="ofs" class="empty">Busca una zona y elige un centro de la lista para ver qué empresas tienen oferta ahí.</div>
+  </div>
+ </div>
+</section>
+
+<!-- VISTA 2 -->
+<section class="view" id="v-todas">
+ <div class="sum" id="sum"></div>
+ <div class="toolbar">
+  <div class="seg" id="tmode"><button data-m="of" class="on">Ofertas</button><button data-m="pe">Pedidos</button></div>
+  <input id="tq" placeholder="Filtrar…" style="flex:1;min-width:140px">
+  <select id="te"><option value="">Todas las empresas</option></select>
+  <label><input type="checkbox" id="tab" checked> Solo con pedidos abiertos</label>
+ </div>
+ <div id="tbl"></div>
+</section>
+
+<section class="view" id="v-admin">
+ <div class="cols">
+  <div class="box"><h2><i>+</i> Crear pedido</h2>
+   <div class="pf" style="margin-top:0">
+    <div><label>Empresa</label><select id="aE"></select></div><div><label>Centro</label><select id="aC"></select></div>
+    <div><label>Pedido (fecha o nombre)</label><input id="aSem" placeholder="Ej. 4/12"></div><div><label>Candidatos necesarios</label><input id="aNeed" type="number" min="1" placeholder="Ej. 10"></div>
+    <div><label>Fecha de incorporación</label><input id="aInc" type="date"></div><div><label>Tipo</label><select id="aTipo"><option>Furgoneta</option><option>Andarín</option></select></div>
+    <div class="f"><label>Nota (sin nombres de candidatos)</label><input id="aNota" placeholder="Ej. Formación 11/12"></div></div>
+   <div class="acts"><button class="btn pri" id="aGo">Crear pedido</button></div></div>
+  <div class="box"><h2>Condiciones de las ofertas</h2><div class="hint" style="margin-bottom:8px">Solo el administrador puede modificarlas. Los cambios los ve todo el equipo.</div><div id="aoffers"></div></div>
+ </div>
+ <div class="box"><h2>Pedidos creados</h2><div id="apeds"></div></div>
+</section>
+<div class="foot">Los pedidos se guardan en la base de datos del equipo. <a id="bk-exp">Exportar copia</a><a id="bk-imp">Importar copia</a><input type="file" id="bk-file" accept="application/json" hidden></div>
+</main>
+
+<div id="ov"></div>
+<aside id="dr" aria-hidden="true"></aside>
+<div class="toast" id="toast"></div>
+
 <script>
+/* ===================== CONFIGURACIÓN DE FIREBASE =====================
+   Pega aquí los datos de tu app web (Consola de Firebase → Configuración del proyecto → Tus apps).
+   Mientras ponga "PEGA_AQUI" la página funciona en modo local (solo en ese navegador). */
+const FIREBASE_CONFIG={
+  apiKey:"PEGA_AQUI",
+  authDomain:"PEGA_AQUI.firebaseapp.com",
+  projectId:"PEGA_AQUI",
+  storageBucket:"PEGA_AQUI.appspot.com",
+  messagingSenderId:"PEGA_AQUI",
+  appId:"PEGA_AQUI"
+};
+/* ===================== DATOS (Excel REQUISITOS_BCN) ===================== */
 const CENTROS=[
- {id:"DCT7",nombre:"DCT7 · Montcada i Reixac",loc:"Montcada i Reixac",lat:41.4905,lng:2.1895,emp:["NOPAR"],
-  det:{NOPAR:{jornada:"38 h semanales",salario:"10,12 €/h brutos + bono asistencia (≈1.660 €/mes)",contrato:"Fijo-discontinuo",horario:"Rutas 10-11h hasta 18-19h (8 h)",listas:"Los martes",
-   req:["2 años de antigüedad de carné","Mínimo 21 años","8 puntos en el carné","Carné homologado en España","Disponibilidad L-D con 2 días de descanso rotativos","Furgoneta facilitada por la empresa"]}}},
- {id:"VCN1",nombre:"VCN1 · Montcada i Reixac",loc:"Montcada i Reixac",lat:41.4840,lng:2.1850,emp:["INSTAPACK"],
-  det:{INSTAPACK:{jornada:"38 h (o parcial 20/30 h)",salario:"9,85 €/h brutos (≈1.418 €/mes)",contrato:"Fijo-discontinuo · 3 meses ampliables según producción",horario:"10-11h a 18-19h (38 h) · Tarde 18-19h a 22-23h (20 h)",listas:"En cuanto haya 2-3 candidatos (cada ~2 días)",
-   req:["1 año de antigüedad de carné (físico, no provisional)","8 puntos","Teléfono con internet","Disponibilidad L-D con 2 descansos rotativos","Formación presencial 1 día remunerada (si supera el mes)"]}}},
- {id:"DCZ4",nombre:"DCZ4 · Mollet del Vallès",loc:"Mollet del Vallès",lat:41.5395,lng:2.2135,emp:["NOPAR"],
-  det:{NOPAR:{jornada:"38 h semanales",salario:"10,12 €/h brutos + bono asistencia",contrato:"Fijo-discontinuo",horario:"Rutas 10-11h hasta 18-19h",listas:"Los martes",
-   req:["2 años de antigüedad de carné","Mínimo 21 años","8 puntos","Carné homologado en España","Disponibilidad L-D con 2 descansos rotativos"]}}},
- {id:"BCN1",nombre:"BCN1 · El Prat de Llobregat",loc:"El Prat de Llobregat",lat:41.3290,lng:2.0960,emp:["INSTAPACK"],
-  det:{INSTAPACK:{jornada:"38 h o parcial 20 h",salario:"9,85 €/h brutos (≈1.418 €/mes)",contrato:"Fijo-discontinuo · 3 meses ampliables",horario:"Mañana 7-8h a 11-12h o tarde 18-19h a 22-23h (20 h) · 10-11h a 18-19h (38 h)",listas:"Los jueves (contratación el lunes siguiente)",
-   req:["1 año de antigüedad de carné (físico)","8 puntos","Teléfono con internet","Disponibilidad L-D con 2 descansos rotativos"]}}},
- {id:"VES2",nombre:"VES2 · El Prat de Llobregat",loc:"El Prat de Llobregat",lat:41.3225,lng:2.0870,emp:["WINIW"],
-  det:{WINIW:{jornada:"36 h semanales",salario:"9,85 €/h brutos (≈1.418 €/mes)",contrato:"Fijo-discontinuo · mensual renovable (hasta 31 dic.)",horario:"Turnos rotativos mañana/tarde cada 1-2 semanas",listas:"Los lunes antes de las 15:00 h",
-   req:["2 meses de antigüedad de carné (físico)","8 puntos","Disponibilidad L-D con 2 descansos rotativos","Incorporación en 1-2 semanas","Formación online no remunerada"]}}},
- {id:"DCT9",nombre:"DCT9 · Verneda (Sant Martí)",loc:"Barcelona · La Verneda",lat:41.4225,lng:2.2040,emp:["INSTAPACK","WINIW"],
-  det:{INSTAPACK:{jornada:"38 h semanales",salario:"9,85 €/h brutos (≈1.418 €/mes)",contrato:"Fijo-discontinuo · 3 meses ampliables",horario:"10-11h a 18-19h",listas:"Los jueves (contratación el lunes siguiente)",
-   req:["1 año de antigüedad de carné","8 puntos","Teléfono con internet","Disponibilidad L-D con 2 descansos rotativos"]},
-   WINIW:{jornada:"36 h semanales",salario:"9,85 €/h brutos",contrato:"Fijo-discontinuo · mensual renovable",horario:"10-11h a 18-19h · Furgoneta o andarín (≤1 km con carrito)",listas:"Los lunes antes de las 15:00 h",
-   req:["2 meses de antigüedad de carné (físico)","8 puntos","Disponibilidad L-D con 2 descansos rotativos","Incorporación en 1-2 semanas"]}}},
- {id:"UES4",nombre:"UES4 · Zona Franca",loc:"Barcelona · Zona Franca",lat:41.3500,lng:2.1400,emp:["INSTAPACK"],
-  det:{INSTAPACK:{jornada:"38 h o parcial 20/30 h",salario:"9,85 €/h brutos",contrato:"Fijo-discontinuo · 3 meses ampliables",horario:"Mañana 9-15h o tarde 17-23h (rotativo) · 7-8h a 11-12h (20 h)",listas:"En cuanto haya 2-3 candidatos (cada ~2 días)",
-   req:["Reparto de productos alimentarios","1 año de antigüedad de carné","8 puntos","Teléfono con internet","Disponibilidad L-D con 2 descansos rotativos"]}}},
- {id:"DCT4",nombre:"DCT4 · Rubí",loc:"Rubí",lat:41.4930,lng:2.0330,emp:["WINIW"],
-  det:{WINIW:{jornada:"36 h semanales",salario:"9,85 €/h brutos (≈1.418 €/mes)",contrato:"Fijo-discontinuo · mensual renovable (hasta 31 dic.)",horario:"10-11h a 18-19h",listas:"Los lunes antes de las 15:00 h",
-   req:["2 meses de antigüedad de carné (físico)","8 puntos","Disponibilidad L-D con 2 descansos rotativos","Incorporación en 1-2 semanas"]}}}
+ {id:"DCT7",loc:"Montcada i Reixac",lat:41.4905,lng:2.1895},
+ {id:"VCN1",loc:"Montcada i Reixac",lat:41.4840,lng:2.1850},
+ {id:"DCZ4",loc:"Mollet del Vallès",lat:41.5395,lng:2.2135},
+ {id:"BCN1",loc:"El Prat de Llobregat",lat:41.3290,lng:2.0960},
+ {id:"VES2",loc:"El Prat de Llobregat",lat:41.3225,lng:2.0870},
+ {id:"DCT9",loc:"Verneda (Barcelona)",lat:41.4225,lng:2.2040},
+ {id:"UES4",loc:"Zona Franca (Barcelona)",lat:41.3500,lng:2.1400},
+ {id:"DCT4",loc:"Rubí",lat:41.4930,lng:2.0330},
+ {id:"VCN2",loc:"Barcelona centro",lat:41.3874,lng:2.1686,aprox:true}
 ];
-/* Poblaciones (lat, lng aprox.) para localizar sin conexión */
+const DIAS="Lunes a domingo, con 2 días de descanso rotativos a la semana";
+const CLAVE="Preguntar si tiene disponibilidad inmediata o si está trabajando.";
+const WIN={e:"WINIW",jornada:"36 h semanales (echan más horas, que se pagan como hora normal)",salario:"9,85 €/h brutos · ≈1.418 € (aprox.)",contrato:"Fijo discontinuo hasta el 28/02/2027, con posibilidad de renovación mensual",inicio:"Incorporación inmediata",formacion:"1 día de formación online (no remunerada)",
+ req:["Carnet de conducir físico (no autorización provisional). No válido el carnet europeo","8 puntos en el carnet de conducir"],
+ incentivos:["Asistencia: 10,29 €/día con jornada de más de 5 h, máximo 6 días a la semana. Una falta injustificada quita todo el mes.","Permanencia: 220,59 € si trabaja del 1/11 al 9/1 sin baja ni faltas injustificadas. Se cobra al final, con enero.","Ayuda: 0,74 € por paquete entregado ayudando a un compañero.","Vuelta a 0: 3,68 € por día que acaba la ruta sin devoluciones y sin ayuda.","Calidad: premio para los 3 mejores del mes según la nota de Amazon (importe por confirmar).","Asistencia y ayuda se cobran a mes vencido."]};
+const INS={e:"INSTAPACK",salario:"9,85 €/h brutos · ≈1.497 €/mes",contrato:"Fijo discontinuo · contratos de 3 meses con posibilidad de ampliar",formacion:"1 día de formación (se cobra al cumplir 1 mes; si no superan el mes, no se paga)",
+ req:["Carnet de conducir físico. No válido el carnet europeo","8 puntos en el carnet de conducir","1 año de antigüedad del carnet"],cond:["Tienen una entrevista con la empresa"]};
+const NOP={e:"NOPAR",jornada:"38 h semanales",salario:"10,12 €/h brutos + bono de asistencia (por ir todos los días / justificante médico) = ≈1.660 €",contrato:"Fijo discontinuo hasta el 31/01/2027 (opción de renovación)",
+ horario:["Horarios rotativos cada semana","Horario facilitado por la empresa"],
+ req:["+21 años","Carnet homologado en España","8 puntos mínimo","2 años de antigüedad del carnet"],cond:["Coche o transporte público para ir al centro, siempre que no le quede muy alejado"]};
+const JOM={e:"JOM SERVICE",jornada:"38 h semanales",salario:"SMI (9,86 €/h)",contrato:"Fijo discontinuo · tres meses con posibilidad de renovación",inicio:"Incorporación inmediata · campaña Black Friday y Navidad",
+ horario:["11:00 h – 19:00 h"],formacion:"El primer día, formación remunerada telemática (de 09:00 a 15:00 h aprox.)",
+ req:["No necesitan más de un año: solo carnet físico. No válido el carnet europeo","8 puntos"],cond:["Categoría: conductor-repartidor"],
+ notas:["El Excel indica también «1 mes de contrato con posibilidad de renovación»: confirmar la duración con la delegación."]};
+const mod=(a)=>a.map(([n,d])=>({n,d}));
+const BASE=[
+ {...NOP,c:"DCT7",tipo:"Furgoneta"},
+ {...NOP,c:"DCZ4",tipo:"Furgoneta"},
+ {...INS,c:"BCN1",tipo:"Furgoneta",jornada:"20, 30 o 38 h semanales",mods:mod([["20 h","Mañana 7/8 h a 11/12 h · Tarde 18/19 h a 22/23 h"],["30 h","Mañana 7:00 a 13:00 h"],["38 h","Jornada completa 10/11 h a 18/19 h"]])},
+ {...INS,c:"UES4",tipo:"Furgoneta · productos alimenticios",jornada:"20, 30 o 38 h semanales",mods:mod([["20 h","Mañana 7/8 h a 11/12 h · Tarde 18/19 h a 22/23 h"],["30 h","Rotativo mañana y tarde, cambian cada semana · Mañana 9 a 15 h · Tarde 17 a 23 h"],["38 h","Jornada completa 10/11 h a 18/19 h"]])},
+ {...INS,c:"DCT9",tipo:"Furgoneta",jornada:"38 h semanales",mods:mod([["38 h","Jornada completa 10/11 h a 18/19 h"]])},
+ {...INS,c:"VCN1",tipo:"Furgoneta",jornada:"20, 30 o 38 h semanales",mods:mod([["20 h","Tarde 18/19 h a 22/23 h"],["30 h","Mañana 7:00 a 13:00 h"],["38 h","10/11 h a 18/19 h"]])},
+ {...WIN,c:"VES2",tipo:"Furgoneta",horario:["Turnos rotativos de mañana y tarde (cada 2 semanas)","Horario facilitado por la empresa"]},
+ {...WIN,c:"DCT9",tipo:"Furgoneta y andarín",horario:["Horario de 10-11 h a 18-19 h"]},
+ {...WIN,c:"DCT4",tipo:"Furgoneta",horario:["Horario de 10-11 h a 18-19 h"]},
+ {...JOM,c:"VCN2",tipo:"Furgoneta"},
+ {...JOM,c:"DCZ4",tipo:"Furgoneta"},
+ {...JOM,c:"DCT9",tipo:"Furgoneta"}
+].map(o=>({...o,id:o.c+"-"+o.e,dias:DIAS}));
+let OFERTAS=BASE;
+
+
+
 const POB={"Barcelona":[41.3874,2.1686],"Barcelona · La Verneda":[41.4225,2.2040],"Barcelona · Sant Martí":[41.4120,2.2050],"Barcelona · Sant Andreu":[41.4350,2.1900],"Barcelona · Nou Barris":[41.4430,2.1770],"Barcelona · Horta-Guinardó":[41.4290,2.1650],"Barcelona · Gràcia":[41.4030,2.1560],"Barcelona · Eixample":[41.3900,2.1620],"Barcelona · Les Corts":[41.3880,2.1300],"Barcelona · Sants":[41.3750,2.1350],"Barcelona · Sarrià-Sant Gervasi":[41.4000,2.1200],"Barcelona · Poblenou":[41.4030,2.2000],"Barcelona · Zona Franca":[41.3500,2.1400],
 "L'Hospitalet de Llobregat":[41.3596,2.0997],"El Prat de Llobregat":[41.3277,2.0950],"Cornellà de Llobregat":[41.3500,2.0700],"Sant Joan Despí":[41.3680,2.0580],"Esplugues de Llobregat":[41.3770,2.0880],"Sant Just Desvern":[41.3830,2.0780],"Sant Feliu de Llobregat":[41.3830,2.0460],"Viladecans":[41.3140,2.0140],"Gavà":[41.3060,2.0010],"Castelldefels":[41.2800,1.9770],"Sant Boi de Llobregat":[41.3440,2.0360],"Molins de Rei":[41.4140,2.0170],"Sant Vicenç dels Horts":[41.3930,2.0090],"Pallejà":[41.4230,1.9930],"Sant Andreu de la Barca":[41.4460,1.9710],"Martorell":[41.4740,1.9300],"Abrera":[41.5160,1.9020],"Olesa de Montserrat":[41.5400,1.8930],"Esparreguera":[41.5370,1.8670],"Cervelló":[41.3970,1.9680],"Santa Coloma de Cervelló":[41.3680,1.9420],"Corbera de Llobregat":[41.4170,1.9280],"Vallirana":[41.3860,1.9330],"Begues":[41.3270,1.9360],"Sant Climent de Llobregat":[41.3350,1.9900],
 "Santa Coloma de Gramenet":[41.4510,2.2080],"Badalona":[41.4500,2.2470],"Sant Adrià de Besòs":[41.4300,2.2190],"Tiana":[41.4780,2.2610],"Montgat":[41.4650,2.2820],"El Masnou":[41.4810,2.3170],"Alella":[41.4930,2.2960],"Premià de Mar":[41.4900,2.3600],"Vilassar de Mar":[41.5070,2.3920],"Mataró":[41.5380,2.4450],
 "Montcada i Reixac":[41.4850,2.1880],"Ripollet":[41.4970,2.1590],"Cerdanyola del Vallès":[41.4910,2.1400],"Barberà del Vallès":[41.5190,2.1250],"Badia del Vallès":[41.5000,2.1100],"Sabadell":[41.5430,2.1090],"Terrassa":[41.5630,2.0080],"Rubí":[41.4930,2.0330],"Sant Cugat del Vallès":[41.4720,2.0860],"Sant Quirze del Vallès":[41.5300,2.0830],"Castellar del Vallès":[41.6160,2.0870],"Sentmenat":[41.6030,2.1300],"Mollet del Vallès":[41.5400,2.2140],"Santa Perpètua de Mogoda":[41.5390,2.1810],"Polinyà":[41.5460,2.1670],"Palau-solità i Plegamans":[41.5970,2.1810],"La Llagosta":[41.5170,2.1940],"Martorelles":[41.5010,2.2410],"Sant Fost de Campsentelles":[41.5100,2.2130],"Montornès del Vallès":[41.5380,2.2500],"Montmeló":[41.5520,2.2480],"Parets del Vallès":[41.5740,2.2340],"Lliçà d'Amunt":[41.5970,2.2330],"Granollers":[41.6080,2.2870],"Canovelles":[41.6150,2.2740],"Les Franqueses del Vallès":[41.6290,2.3010],"Caldes de Montbui":[41.6310,2.1670],"Cardedeu":[41.6400,2.3580],"Vilanova del Vallès":[41.5640,2.3000],
 "Sant Sadurní d'Anoia":[41.4260,1.7860],"Gelida":[41.4380,1.8630],"Piera":[41.5230,1.7490],"Vilafranca del Penedès":[41.3450,1.6990],"Sitges":[41.2370,1.8050],"Vilanova i la Geltrú":[41.2240,1.7260],"Sant Pere de Ribes":[41.2570,1.7700],"Igualada":[41.5790,1.6170],"Manresa":[41.7270,1.8260]};
-const norm=s=>(s||"").toString().normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();
-const POBN={}; Object.keys(POB).forEach(k=>POBN[norm(k)]=k);
-const ALIAS={"hospitalet":"L'Hospitalet de Llobregat","l hospitalet":"L'Hospitalet de Llobregat","prat":"El Prat de Llobregat","el prat":"El Prat de Llobregat","moncada y reixach":"Montcada i Reixac","montcada":"Montcada i Reixac","moncada":"Montcada i Reixac","mollet":"Mollet del Vallès","verneda":"Barcelona · La Verneda","zona franca":"Barcelona · Zona Franca","sant cugat":"Sant Cugat del Vallès","sant boi":"Sant Boi de Llobregat","cornella":"Cornellà de Llobregat","sant feliu":"Sant Feliu de Llobregat","santa coloma":"Santa Coloma de Gramenet","sant adria":"Sant Adrià de Besòs","viladecans":"Viladecans","vilafranca":"Vilafranca del Penedès","vilanova":"Vilanova i la Geltrú","cerdanyola":"Cerdanyola del Vallès","barbera":"Barberà del Vallès","sant quirze":"Sant Quirze del Vallès","les franqueses":"Les Franqueses del Vallès"};
-Object.keys(ALIAS).forEach(k=>POBN[k]=ALIAS[k]);
 
-
-Object.keys(POB).forEach(k=>{if(k.startsWith("Barcelona · "))POBN[norm(k.slice(12))]=k});
-const ALIAS2={"hospitalet":"L'Hospitalet de Llobregat","prat":"El Prat de Llobregat","moncada y reixach":"Montcada i Reixac","montcada":"Montcada i Reixac","mollet":"Mollet del Vallès","verneda":"Barcelona · La Verneda","sant cugat":"Sant Cugat del Vallès","sant boi":"Sant Boi de Llobregat","cornella":"Cornellà de Llobregat","sant feliu":"Sant Feliu de Llobregat","santa coloma":"Santa Coloma de Gramenet","sant adria":"Sant Adrià de Besòs","vilafranca":"Vilafranca del Penedès","vilanova":"Vilanova i la Geltrú","cerdanyola":"Cerdanyola del Vallès","barbera":"Barberà del Vallès","sant quirze":"Sant Quirze del Vallès","les franqueses":"Les Franqueses del Vallès","sant andreu":"Barcelona · Sant Andreu","nou barris":"Barcelona · Nou Barris","horta":"Barcelona · Horta-Guinardó","gracia":"Barcelona · Gràcia","sarria":"Barcelona · Sarrià-Sant Gervasi","sant marti":"Barcelona · Sant Martí","poblenou":"Barcelona · Poblenou","sants":"Barcelona · Sants","les corts":"Barcelona · Les Corts","eixample":"Barcelona · Eixample"};
-Object.keys(ALIAS2).forEach(k=>POBN[k]=ALIAS2[k]);
+/* ===================== UTILIDADES ===================== */
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm=s=>(s||"").toString().normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();
+const POBN={};Object.keys(POB).forEach(k=>{POBN[norm(k)]=k;if(k.startsWith("Barcelona · "))POBN[norm(k.slice(12))]=k});
+Object.entries({"hospitalet":"L'Hospitalet de Llobregat","prat":"El Prat de Llobregat","moncada y reixach":"Montcada i Reixac","montcada":"Montcada i Reixac","mollet":"Mollet del Vallès","verneda":"Barcelona · La Verneda","sant cugat":"Sant Cugat del Vallès","sant boi":"Sant Boi de Llobregat","cornella":"Cornellà de Llobregat","sant feliu":"Sant Feliu de Llobregat","santa coloma":"Santa Coloma de Gramenet","sant adria":"Sant Adrià de Besòs","vilafranca":"Vilafranca del Penedès","vilanova":"Vilanova i la Geltrú","cerdanyola":"Cerdanyola del Vallès","barbera":"Barberà del Vallès","sant quirze":"Sant Quirze del Vallès","les franqueses":"Les Franqueses del Vallès","sant andreu":"Barcelona · Sant Andreu","nou barris":"Barcelona · Nou Barris","horta":"Barcelona · Horta-Guinardó","gracia":"Barcelona · Gràcia","sarria":"Barcelona · Sarrià-Sant Gervasi","sant marti":"Barcelona · Sant Martí","poblenou":"Barcelona · Poblenou","sants":"Barcelona · Sants","les corts":"Barcelona · Les Corts","eixample":"Barcelona · Eixample"}).forEach(([k,v])=>POBN[k]=v);
 function km(a,b){const R=6371,r=x=>x*Math.PI/180,A=r(b[0]-a[0]),B=r(b[1]-a[1]);const h=Math.sin(A/2)**2+Math.cos(r(a[0]))*Math.cos(r(b[0]))*Math.sin(B/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
-function findPob(q){const n=norm(q);if(!n)return null;let k=POBN[n]?n:Object.keys(POBN).find(x=>x.startsWith(n))||Object.keys(POBN).find(x=>x.includes(n));return k?{name:POBN[k],ll:POB[POBN[k]]}:null}
+const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),2200)};
+const fd=iso=>{if(!iso)return"";const[y,m,d]=iso.split("-");return d+"/"+m};
+const ECOL={"NOPAR":"#2563eb","INSTAPACK":"#f97316","WINIW":"#10b981","JOM SERVICE":"#d946ef"};
+const ec=e=>ECOL[e]||"#e5173f";
+const eb=e=>`<span class="eb" style="--c:${ec(e)}">${esc(e)}</span>`;
+const centro=id=>CENTROS.find(c=>c.id===id);
+const cname=c=>c.loc+" · "+c.id;
+
+/* ===================== PEDIDOS (guardado en el navegador) ===================== */
+const SK="centrosOfertas_pedidos_v1";
+const cloudOn=!/PEGA/i.test(FIREBASE_CONFIG.apiKey);
+let PED=[],CL=null,firstSnap=true;
+if(!cloudOn){try{PED=JSON.parse(localStorage.getItem(SK))}catch(e){}if(!Array.isArray(PED))PED=[]}
+const savePed=()=>{if(!cloudOn){try{localStorage.setItem(SK,JSON.stringify(PED))}catch(e){}}};
+const clean=o=>JSON.parse(JSON.stringify(o));
+const cerr=e=>{console.error(e);toast("No se pudo guardar: "+(e.code||e.message))};
+const cref=id=>CL.F.doc(CL.db,"pedidos",id);
+const mut={
+ add(p){if(cloudOn)CL.F.setDoc(cref(p.id),clean(p)).catch(cerr);else{PED.push(p);savePed()}},
+ set(p,f){if(cloudOn)CL.F.updateDoc(cref(p.id),f).catch(cerr);else{Object.assign(p,f);savePed()}},
+ inc(p,d){if(cloudOn)CL.F.updateDoc(cref(p.id),{env:CL.F.increment(d)}).catch(cerr);else{p.env=Math.max(0,(p.env||0)+d);savePed()}},
+ del(p){if(cloudOn)CL.F.deleteDoc(cref(p.id)).catch(cerr);else{PED=PED.filter(x=>x.id!==p.id);savePed()}}};
+async function replaceAll(list){
+  if(!cloudOn){PED=clean(list);savePed();afterChange();return}
+  const keep=new Set(list.map(x=>x.id)),ops=list.map(x=>["s",x]);PED.filter(x=>!keep.has(x.id)).forEach(x=>ops.push(["d",x]));
+  try{for(let i=0;i<ops.length;i+=400){const b=CL.F.writeBatch(CL.db);ops.slice(i,i+400).forEach(([t,x])=>t==="s"?b.set(cref(x.id),clean(x)):b.delete(cref(x.id)));await b.commit()}}catch(e){cerr(e)}}
+function setStatus(m){const e=$("#cstat"),o=$("#btnOut");
+  if(!cloudOn){e.innerHTML='<span class="dotc warn"></span>Modo local (sin base de datos compartida)'}
+  else if(!CL||!CL.user){e.innerHTML='<span class="dotc"></span>Sin sesión'}
+  else e.innerHTML=(m==="off"?'<span class="dotc warn"></span>Sin conexión · se sincronizará':'<span class="dotc ok"></span>Sincronizado')+(ADMIN?" · <b>Administrador</b>":"");
+  o.hidden=!(cloudOn&&CL&&CL.user);adminUI()}
+function adminUI(){$("#navAdmin").hidden=!ADMIN;$("#bk-imp").style.display=ADMIN?"":"none";
+  if(!ADMIN&&$("#v-admin").classList.contains("on"))$("#nav").querySelector("[data-v=buscar]").click()}
+async function cloudInit(){
+  setStatus();if(!cloudOn)return;
+  try{
+    const B="https://www.gstatic.com/firebasejs/10.14.1/";
+    const [A,F,Au]=await Promise.all([import(B+"firebase-app.js"),import(B+"firebase-firestore.js"),import(B+"firebase-auth.js")]);
+    const app=A.initializeApp(FIREBASE_CONFIG);let db;
+    try{db=F.initializeFirestore(app,{localCache:F.persistentLocalCache({tabManager:F.persistentMultipleTabManager()})})}catch(e){db=F.getFirestore(app)}
+    const auth=Au.getAuth(app);CL={F,Au,db,auth,user:null};
+    Au.onAuthStateChanged(auth,async u=>{CL.user=u;
+      if(u){$("#mLogin").classList.remove("on");
+        try{ADMIN=(await F.getDoc(F.doc(db,"admins",u.uid))).exists()}catch(e){ADMIN=false}
+        CL.unsubO=F.onSnapshot(F.collection(db,"ofertas"),sn=>{OV={};sn.docs.forEach(d=>OV[d.id]=d.data());applyOV();afterChange()},cerr);
+        CL.unsub=F.onSnapshot(F.collection(db,"pedidos"),snap=>{
+          PED=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.ord||0)-(b.ord||0));
+          setStatus(snap.metadata.fromCache&&!navigator.onLine?"off":"on");afterChange()},cerr)}
+      else{if(CL.unsub){CL.unsub();CL.unsub=null}if(CL.unsubO){CL.unsubO();CL.unsubO=null}ADMIN=false;PED=[];OV={};applyOV();afterChange();$("#mLogin").classList.add("on")}
+      setStatus()});
+  }catch(e){console.error(e);toast("No se pudo cargar Firebase (¿sin conexión?)")}}
+async function login(){const er=$("#lErr");er.textContent="";
+  try{await CL.Au.signInWithEmailAndPassword(CL.auth,$("#lMail").value.trim(),$("#lPass").value);$("#lPass").value=""}
+  catch(x){er.textContent=({"auth/invalid-credential":"Correo o contraseña incorrectos","auth/invalid-email":"Correo no válido","auth/too-many-requests":"Demasiados intentos, espera unos minutos","auth/network-request-failed":"Sin conexión"})[x.code]||x.code||x.message}}
+$("#lGo").onclick=login;$("#lPass").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
+$("#btnOut").onclick=()=>CL&&CL.Au.signOut(CL.auth);
+
+function afterChange(){
+  const keep={};document.querySelectorAll("#dr [id^=np-]").forEach(i=>keep[i.id]=i.value);
+  const sc=$("#dr").scrollTop;refresca();
+  if(curO)curO=OFERTAS.find(x=>x.id===curO.id)||curO;
+  if(curO&&!editing){pintaFicha();Object.entries(keep).forEach(([k,v])=>{const i=document.getElementById(k);if(i)i.value=v});$("#dr").scrollTop=sc}}
+let ADMIN=!cloudOn,OV={},editing=false;
+const OVK="centrosOfertas_ov_v1";
+if(!cloudOn){try{OV=JSON.parse(localStorage.getItem(OVK))||{}}catch(e){}}
+const OF_KEYS=["tipo","jornada","dias","salario","contrato","inicio","formacion","horario","mods","req","cond","incentivos","notas"];
+function applyOV(){OFERTAS=BASE.map(o=>{const m={...o,...(OV[o.id]||{})};OF_KEYS.forEach(k=>{if((Array.isArray(m[k])&&!m[k].length)||m[k]==="")m[k]=undefined});return m})}
+function saveOV(id,f){if(cloudOn)CL.F.setDoc(CL.F.doc(CL.db,"ofertas",id),clean(f)).catch(cerr);else{OV[id]=f;try{localStorage.setItem(OVK,JSON.stringify(OV))}catch(e){}applyOV();afterChange()}}
+function resetOV(id){if(cloudOn)CL.F.deleteDoc(CL.F.doc(CL.db,"ofertas",id)).catch(cerr);else{delete OV[id];try{localStorage.setItem(OVK,JSON.stringify(OV))}catch(e){}applyOV();afterChange()}}
+applyOV();
+const isDone=p=>p.closed||(p.need!=null&&p.env!=null&&p.env>=p.need);
+const pedOf=o=>PED.filter(p=>p.e===o.e&&p.c===o.c);
+function stat(o){
+  const ab=pedOf(o).filter(p=>!isDone(p));
+  const faltan=ab.reduce((n,p)=>n+(p.need!=null?Math.max(0,p.need-(p.env||0)):0),0);
+  const sinCifra=ab.some(p=>p.need==null);
+  const prox=ab.map(p=>p.inc).filter(Boolean).sort()[0]||"";
+  return{ab:ab.length,faltan,sinCifra,prox};
+}
+function badge(o){const s=stat(o);
+  if(!s.ab)return'<span class="tagp ok">Sin pedidos abiertos</span>';
+  return`<span class="tagp">${s.ab} pedido${s.ab>1?"s":""} abierto${s.ab>1?"s":""}${s.faltan?` · faltan ${s.faltan}`:""}${s.sinCifra?" · hay pedidos sin cifra":""}</span>`}
+
+/* ===================== MINUTOS EN COCHE ===================== */
+const estMin=(ll,c)=>Math.max(3,Math.round(km(ll,[c.lat,c.lng])*1.3/45*60));
+const fm=(m,e)=>(e?"~":"")+(m>=60?Math.floor(m/60)+" h "+(m%60)+" min":m+" min");
+async function routeAll(ll){
+  const coords=[ll,...CENTROS.map(c=>[c.lat,c.lng])].map(x=>x[1]+","+x[0]).join(";");
+  try{const r=await fetch(`https://router.project-osrm.org/table/v1/driving/${coords}?sources=0&destinations=${CENTROS.map((_,i)=>i+1).join(";")}&annotations=duration,distance`);
+    const j=await r.json();if(j.code!=="Ok")throw 0;
+    return CENTROS.map((c,i)=>({c,m:Math.max(1,Math.round(j.durations[0][i]/60)),k:Math.round(j.distances[0][i]/100)/10,e:false}))}
+  catch(e){return null}}
+const approx=(ll)=>CENTROS.map(c=>({c,m:estMin(ll,c),k:Math.round(km(ll,[c.lat,c.lng])*13)/10,e:true}));
+
+/* ===================== BÚSQUEDA DE ZONA ===================== */
 const VB="1.3,42.4,2.7,41.15";
 async function remote(q,n){try{const r=await fetch("https://nominatim.openstreetmap.org/search?format=json&limit="+n+"&countrycodes=es&bounded=1&viewbox="+VB+"&q="+encodeURIComponent(q));
-  return (await r.json()).map(x=>({name:x.display_name.split(",").slice(0,2).map(t=>t.trim()).join(", "),ll:[+x.lat,+x.lon]}))}catch(e){return[]}}
-async function geocode(q){
-  const n=norm(q);if(POBN[n])return{name:POBN[n],ll:POB[POBN[n]]};
-  const r=await remote(q,1);if(r[0])return r[0];
-  return findPob(q)}
+  return(await r.json()).map(x=>({name:x.display_name.split(",").slice(0,2).map(t=>t.trim()).join(", "),ll:[+x.lat,+x.lon]}))}catch(e){return[]}}
 function localMatches(q){const n=norm(q),out=[],seen=new Set();
-  for(const k of Object.keys(POBN)){if(k.startsWith(n)||k.split(" ").some(w=>w.startsWith(n))){const nm=POBN[k];if(!seen.has(nm)){seen.add(nm);out.push({name:nm,ll:POB[nm]})}}}
+  for(const k of Object.keys(POBN)){if(k.startsWith(n)||k.split(" ").some(w=>w.startsWith(n))){const nm=POBN[k];if(!seen.has(nm)){seen.add(nm);out.push({name:nm.replace("Barcelona · ","Barcelona, "),ll:POB[nm]})}}}
   return out.slice(0,5)}
-const est=(ll,c)=>Math.max(3,Math.round(km(ll,[c.lat,c.lng])*1.3/45*60));
-const fm=(m,e)=>(e?"~":"")+(m>=60?Math.floor(m/60)+" h "+m%60+" min":m+" min");
-async function route(ll){
-  const cs=CENTROS;const coords=[ll,...cs.map(c=>[c.lat,c.lng])].map(x=>x[1]+","+x[0]).join(";");
-  try{const r=await fetch(`https://router.project-osrm.org/table/v1/driving/${coords}?sources=0&destinations=${cs.map((_,i)=>i+1).join(";")}&annotations=duration,distance`);
-    const j=await r.json();if(j.code!=="Ok")throw 0;
-    return cs.map((c,i)=>({c,m:Math.max(1,Math.round(j.durations[0][i]/60)),k:Math.round(j.distances[0][i]/100)/10,e:false}))}
-  catch(e){return cs.map(c=>({c,m:est(ll,c),k:Math.round(km(ll,[c.lat,c.lng])*13)/10,e:true}))}}
-function draw(name,rows,ll){
-  rows.sort((a,b)=>a.m-b.m);
-  $("#res").innerHTML=`<h2>Desde <b>${esc(name)}</b> · ordenados por tiempo</h2>`+rows.map((x,i)=>{
-    const c=x.c,lis=[...new Set(c.emp.map(e=>c.det[e].listas))].join(" / ");
-    return`<div class="c ${i?"":"first"}"><div><b>${esc(c.nombre)}</b>${i?"":'<span class="badge">MÁS CERCANO</span>'}
-    <div class="emp">${c.emp.map(e=>`<span>${e}</span>`).join("")}</div></div>
-    <div class="min">🚗 ${fm(x.m,x.e)}<small>${x.k} km${x.e?" (aprox.)":""}</small></div>
-    <div class="meta"><span>📅 Listas: ${esc(c.emp.map(e=>e+": "+c.det[e].listas).join(" · "))}</span>
-    <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=${ll[0]},${ll[1]}&destination=${c.lat},${c.lng}&travelmode=transit">Ruta en transporte público ↗</a></div></div>`}).join("")}
-let seq=0;
-async function go(q,pre){
-  q=q.trim();if(!q)return;const my=++seq;$("#sug").style.display="none";$("#res").innerHTML='<div class="sub">Buscando…</div>';
+async function geocode(q){const n=norm(q);if(POBN[n]){const nm=POBN[n];return{name:nm.replace("Barcelona · ","Barcelona, "),ll:POB[nm]}}
+  const r=await remote(q,1);if(r[0])return r[0];const l=localMatches(q);return l[0]||null}
+let Z=null,selC=null,seq=0;
+async function buscar(q,pre){
+  q=q.trim();if(!q)return;const my=++seq;$("#sug").style.display="none";
+  $("#b2").style.display="block";$("#clist").innerHTML='<div class="empty" style="padding:12px">Buscando…</div>';$("#zinfo").textContent="";
   const g=pre||await geocode(q);if(my!==seq)return;
-  if(!g){$("#res").innerHTML='<div class="err">No encuentro esa zona. Prueba con el nombre del barrio o municipio.</div>';return}
-  const base=CENTROS.map(c=>({c,m:est(g.ll,c),k:Math.round(km(g.ll,[c.lat,c.lng])*13)/10,e:true}));
-  draw(g.name,base,g.ll);
-  const real=await route(g.ll);if(my===seq)draw(g.name,real,g.ll)}
-$("#f").onsubmit=e=>{e.preventDefault();go($("#q").value)};
-let sugT,sugSeq=0,sugList=[];
-function showSug(l){sugList=l;const e=$("#sug");e.style.display=l.length?"block":"none";e.innerHTML=l.map((x,i)=>`<div data-i="${i}">${esc(x.name)}</div>`).join("")}
+  if(!g){$("#clist").innerHTML='<div class="empty" style="padding:12px">No encuentro esa zona. Prueba con el nombre del barrio o del municipio.</div>';return}
+  Z={name:g.name,ll:g.ll,rows:approx(g.ll)};selC=null;pintaZona();pintaOfertas();
+  const real=await routeAll(g.ll);if(my!==seq||!real)return;Z.rows=real;pintaZona();
+}
+function pintaZona(){
+  const rows=[...Z.rows].sort((a,b)=>a.m-b.m);
+  $("#zinfo").innerHTML=`Desde <b>${esc(Z.name)}</b>, ordenados por tiempo de viaje. Pulsa un centro para ver sus ofertas.`;
+  $("#clist").innerHTML=rows.map((x,i)=>{
+    const ofs=OFERTAS.filter(o=>o.c===x.c.id);
+    return`<button class="crow ${selC===x.c.id?"sel":""}" data-c="${x.c.id}"><span class="rk">${i+1}</span>
+    <span class="cn">${esc(x.c.loc)}<small>${x.c.id}</small></span>
+    <span class="min ${x.m<=25?"":x.m<=45?"a":"r"}">${fm(x.m,x.e).replace(" min","")}<small>min</small><em>${x.k} km${x.e?" aprox.":""}</em></span>
+    <span class="csub">${ofs.map(o=>{const s=stat(o);return`<span>${eb(o.e)}${s.ab?` <span class="tagp">${s.faltan?"faltan "+s.faltan:s.ab+" abierto"+(s.ab>1?"s":"")}</span>`:""}</span>`}).join("")}</span></button>`}).join("")}
+$("#clist").onclick=e=>{const b=e.target.closest("[data-c]");if(!b)return;selC=b.dataset.c;pintaZona();pintaOfertas();
+  if(innerWidth<=860)$("#b3").scrollIntoView({block:"start"})};
+function pintaOfertas(){
+  const box=$("#ofs");
+  if(!selC){box.className="empty";box.innerHTML=Z?"Elige un centro de la lista para ver sus ofertas.":"Busca una zona y elige un centro de la lista para ver qué empresas tienen oferta ahí.";return}
+  const c=centro(selC),ofs=OFERTAS.filter(o=>o.c===selC),row=Z&&Z.rows.find(r=>r.c.id===selC);
+  box.className="";
+  box.innerHTML=`<div style="margin-bottom:4px"><b style="font-size:17px">${esc(c.loc)}</b> <span class="hint">· centro ${c.id}${c.aprox?" · ubicación aproximada":""}</span></div>
+   ${row?`<div class="hint">${fm(row.m,row.e)} en coche desde ${esc(Z.name)} · <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=${Z.ll[0]},${Z.ll[1]}&destination=${c.lat},${c.lng}&travelmode=transit">ver ruta en transporte público</a></div>`:""}
+   <div style="margin-top:12px;font-weight:600">${ofs.length>1?`Hay ${ofs.length} empresas en este centro. Elige una para ver la oferta completa:`:"Oferta en este centro:"}</div>`+
+   ofs.map(o=>`<button class="orow" data-o="${o.id}" style="--c:${ec(o.e)}"><span class="go">Ver oferta completa ›</span><b>${o.e}</b>
+    <div>${esc(o.tipo)} · ${esc(o.jornada)}</div><div>${esc(o.salario)}</div><div style="margin-top:5px">${badge(o)}</div></button>`).join("")}
+$("#ofs").onclick=e=>{const b=e.target.closest("[data-o]");if(b)abre(b.dataset.o)};
+$("#f").onsubmit=e=>{e.preventDefault();buscar($("#q").value)};
+let sugT,sugN=0,sugL=[];
+function showSug(l){sugL=l;const s=$("#sug");s.style.display=l.length?"block":"none";s.innerHTML=l.map((x,i)=>`<div data-i="${i}">${esc(x.name)}</div>`).join("")}
 $("#q").addEventListener("input",()=>{clearTimeout(sugT);const q=$("#q").value.trim();if(q.length<2){showSug([]);return}
-  const loc=localMatches(q);showSug(loc);const my=++sugSeq;
-  sugT=setTimeout(async()=>{const r=await remote(q,6);if(my!==sugSeq)return;const seen=new Set(loc.map(x=>norm(x.name)));
-    showSug(loc.concat(r.filter(x=>!seen.has(norm(x.name)))).slice(0,8))},450)});
-$("#sug").onclick=e=>{const d=e.target.closest("[data-i]");if(!d)return;const x=sugList[+d.dataset.i];$("#q").value=x.name.replace("Barcelona · ","");go(x.name,x)};
+  const loc=localMatches(q);showSug(loc);const my=++sugN;
+  sugT=setTimeout(async()=>{const r=await remote(q,6);if(my!==sugN)return;const seen=new Set(loc.map(x=>norm(x.name)));showSug(loc.concat(r.filter(x=>!seen.has(norm(x.name)))).slice(0,8))},450)});
+$("#sug").onclick=e=>{const d=e.target.closest("[data-i]");if(!d)return;const x=sugL[+d.dataset.i];$("#q").value=x.name;buscar(x.name,x)};
 document.addEventListener("click",e=>{if(!e.target.closest("#sug,#q"))$("#sug").style.display="none"});
-$("#chips").innerHTML=["Sant Andreu","Nou Barris","Sants","L'Hospitalet de Llobregat","Badalona","Santa Coloma de Gramenet","Sabadell","Terrassa","Granollers","Viladecans"].map(x=>`<button type="button">${x}</button>`).join("");
-$("#chips").onclick=e=>{if(e.target.tagName==="BUTTON"){$("#q").value=e.target.textContent;go(e.target.textContent)}};
+$("#quick").innerHTML=["Sant Andreu","Nou Barris","Sant Martí","Sants","Eixample","Gràcia","L'Hospitalet de Llobregat","Badalona","Santa Coloma de Gramenet","Cornellà de Llobregat","Sabadell","Terrassa","Granollers","Mataró","Viladecans","Castelldefels"].map(x=>`<button type="button" class="zb" data-z="${x}">${x}</button>`).join("");
+$("#quick").onclick=e=>{const z=e.target.dataset.z;if(z){$("#q").value=z;buscar(z)}};
+
+/* ===================== FICHA DE OFERTA ===================== */
+let curO=null,showForm=false;
+function abre(id){curO=OFERTAS.find(o=>o.id===id);editing=false;pintaFicha();document.body.classList.add("open");$("#dr").setAttribute("aria-hidden","false");$("#dr").scrollTop=0}
+function cierra(){editing=false;document.body.classList.remove("open");$("#dr").setAttribute("aria-hidden","true");curO=null;refresca()}
+$("#ov").onclick=cierra;document.addEventListener("keydown",e=>{if(e.key==="Escape"&&curO)cierra()});
+const li=a=>a&&a.length?`<ul class="l">${a.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:"";
+function pedHTML(p){
+  const d=isDone(p),pct=p.need?Math.min(100,Math.round((p.env||0)/p.need*100)):0;
+  return`<div class="ped ${d?"done":""}" data-p="${p.id}">
+   <div class="ph"><b>Pedido ${esc(p.sem)}${p.tipo==="Andarín"?" · andarines":""}</b><span>${d?'<span class="tagp ok">Completado</span>':'<span class="tagp">Abierto</span>'}</span></div>
+   <div class="cnt"><button data-a="menos" aria-label="Restar enviado">−</button><span>${p.env||0}${p.need!=null?`<small> / ${p.need}</small>`:""}</span><button data-a="mas" aria-label="Sumar enviado">+</button>
+    <span class="hint" style="min-width:0;text-align:left;font-weight:400;font-size:13px">enviados a delegación${p.need!=null&&!d?` · faltan ${Math.max(0,p.need-(p.env||0))}`:""}${p.need==null?" · sin cifra de pedido":""}</span></div>
+   ${p.need?`<div class="bar ${d?"done":""}"><i style="width:${pct}%"></i></div>`:""}
+   <div class="hint" style="margin-top:6px">${p.inc?`Incorporación: <b style="color:var(--ink)">${fd(p.inc)}</b>`:"Sin fecha de incorporación"}${p.nota?` · ${esc(p.nota)}`:""}</div>
+   <div class="acts"><button class="btn sm" data-a="${p.closed?"abrir":"cerrar"}">${p.closed?"Reabrir":"Marcar completado"}</button>${ADMIN?'<button class="btn sm" data-a="borrar">Eliminar</button>':""}</div></div>`}
+function pintaFicha(){
+  const o=curO,c=centro(o.c),peds=pedOf(o),ab=peds.filter(p=>!isDone(p)),ce=peds.filter(isDone);
+  const dist=Z&&Z.rows.find(r=>r.c.id===o.c);
+  $("#dr").innerHTML=`<div class="dh" style="--c:${ec(o.e)}"><button class="x" onclick="cierra()" aria-label="Cerrar">×</button><h3>${o.e}</h3>
+    <div class="hint">${esc(c.loc)} · centro ${c.id}${c.aprox?" (ubicación aproximada)":""}${dist?` · ${fm(dist.m,dist.e)} en coche desde ${esc(Z.name)}`:""}</div></div>
+   <div class="db" style="--c:${ec(o.e)}">
+   <div class="key">${CLAVE}</div>
+   <div class="sec"><h4>Resumen</h4><dl class="kv">
+     <dt>Tipo</dt><dd>${esc(o.tipo)}</dd>
+     <dt>Jornada</dt><dd>${esc(o.jornada)}</dd>
+     <dt>Días</dt><dd>${esc(o.dias)}</dd>
+     <dt>Salario</dt><dd>${esc(o.salario)}</dd>
+     <dt>Contrato</dt><dd>${esc(o.contrato)}</dd>
+     ${o.inicio?`<dt>Inicio</dt><dd>${esc(o.inicio)}</dd>`:""}
+     ${o.formacion?`<dt>Formación</dt><dd>${esc(o.formacion)}</dd>`:""}</dl></div>
+   ${o.mods?`<div class="sec"><h4>Modalidades y horarios</h4><div class="mod">${o.mods.map(m=>`<div class="h">${esc(m.n)}</div><div>${esc(m.d)}</div>`).join("")}</div></div>`:""}
+   ${o.horario?`<div class="sec"><h4>Horario</h4>${li(o.horario)}</div>`:""}
+   <div class="sec"><h4>Requisitos</h4>${li(o.req)}</div>
+   ${o.cond?`<div class="sec"><h4>Otras condiciones</h4>${li(o.cond)}</div>`:""}
+   ${o.incentivos?`<div class="sec"><h4>Incentivos</h4>${li(o.incentivos)}</div>`:""}
+   ${o.notas?`<div class="sec"><h4>Ojo</h4>${li(o.notas)}</div>`:""}
+   <div class="acts" style="margin-top:16px"><button class="btn pri" data-a="copiar">Copiar oferta para enviar</button>${ADMIN?'<button class="btn" data-a="editar">Editar condiciones</button>':""}<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${c.lat},${c.lng}" style="text-decoration:none;color:inherit">Ver centro en el mapa</a></div>
+   <div class="sec"><h4>Pedidos de este centro (${ab.length} abierto${ab.length===1?"":"s"})</h4>
+    ${ab.map(pedHTML).join("")||'<div class="hint" style="margin-bottom:8px">No hay pedidos abiertos.</div>'}
+    ${ADMIN?'<button class="btn" data-a="nuevop">+ Crear pedido para esta oferta</button>':""}
+    ${ce.length?`<details style="margin-top:12px"><summary class="hint" style="cursor:pointer">Pedidos completados (${ce.length})</summary><div style="margin-top:8px">${ce.map(pedHTML).join("")}</div></details>`:""}
+   </div></div>`}
+function textoOferta(o){const c=centro(o.c);
+  return[`${o.e} · ${c.loc} (centro ${c.id})`,`Tipo: ${o.tipo}`,`Jornada: ${o.jornada}`,`Días: ${o.dias}`,`Salario: ${o.salario}`,`Contrato: ${o.contrato}`,o.inicio?`Inicio: ${o.inicio}`:"",o.formacion?`Formación: ${o.formacion}`:"",
+   o.mods?"Modalidades:\n"+o.mods.map(m=>`- ${m.n}: ${m.d}`).join("\n"):"",o.horario?"Horario:\n"+o.horario.map(x=>"- "+x).join("\n"):"",
+   "Requisitos:\n"+o.req.map(x=>"- "+x).join("\n"),o.cond?"Otras condiciones:\n"+o.cond.map(x=>"- "+x).join("\n"):"",
+   o.incentivos?"Incentivos:\n"+o.incentivos.map(x=>"- "+x).join("\n"):""].filter(Boolean).join("\n")}
+$("#dr").addEventListener("click",async e=>{
+  const b=e.target.closest("[data-a]");if(!b||!curO)return;const a=b.dataset.a,pid=b.closest("[data-p]")?.dataset.p,p=PED.find(x=>x.id===pid);
+  if(a==="copiar"){const t=textoOferta(curO);try{await navigator.clipboard.writeText(t)}catch(x){const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove()}toast("Oferta copiada");return}
+  if(a==="editar"){editing=true;pintaEditor();$("#dr").scrollTop=0;return}
+  if(a==="ed-cancelar"){editing=false;pintaFicha();return}
+  if(a==="ed-guardar"){guardaEditor();return}
+  if(a==="ed-reset"){if(confirm("¿Volver a las condiciones originales de esta oferta?")){editing=false;resetOV(curO.id);toast("Condiciones restauradas");if(cloudOn)pintaFicha()}return}
+  if(a==="nuevop"){const o=curO;cierra();document.querySelector("#nav [data-v=admin]").click();$("#aE").value=o.e;fillAC();$("#aC").value=o.c;$("#aSem").focus();return}
+  if(p){
+    if(a==="mas"){if(p.need!=null&&(p.env||0)+1===p.need)toast("Pedido completo");mut.inc(p,1)}
+    else if(a==="menos"){if((p.env||0)>0)mut.inc(p,-1)}
+    else if(a==="cerrar")mut.set(p,{closed:true});
+    else if(a==="abrir")mut.set(p,p.need!=null&&p.env>=p.need?{closed:false,env:p.need-1}:{closed:false});
+    else if(a==="borrar"){if(!confirm("¿Eliminar este pedido?"))return;mut.del(p)}}
+  afterChange()});
+
+/* ===================== EDITOR DE CONDICIONES (admin) ===================== */
+function pintaEditor(){
+  const o=curO,L=a=>esc((a||[]).join("\n")),I=(id,l,v,f)=>`<div class="${f?"f":""}"><label>${l}</label><input id="${id}" value="${esc(v||"")}"></div>`,T=(id,l,v,h)=>`<div class="f"><label>${l} <span style="opacity:.7">(una línea por punto)</span></label><textarea id="${id}" rows="${h||3}">${L(v)}</textarea></div>`;
+  $("#dr").innerHTML=`<div class="dh" style="--c:${ec(o.e)}"><button class="x" onclick="cierra()" aria-label="Cerrar">×</button><h3>Editar condiciones</h3><div class="hint">${esc(o.e)} · ${esc(centro(o.c).loc)} · ${o.c}</div></div>
+  <div class="db" style="--c:${ec(o.e)}"><div class="hint" style="margin-top:14px">Los cambios los verá todo el equipo. Para quitar un apartado, déjalo vacío.</div>
+  <div class="pf">${I("ed-tipo","Tipo",o.tipo,1)}${I("ed-jornada","Jornada",o.jornada,1)}${I("ed-dias","Días",o.dias,1)}${I("ed-salario","Salario",o.salario,1)}${I("ed-contrato","Contrato",o.contrato,1)}${I("ed-inicio","Inicio",o.inicio,1)}${I("ed-formacion","Formación",o.formacion,1)}
+  <div class="f"><label>Modalidades y horarios <span style="opacity:.7">(una por línea: «20 h | Mañana 7 a 11 h»)</span></label><textarea id="ed-mods" rows="3">${esc((o.mods||[]).map(m=>m.n+" | "+m.d).join("\n"))}</textarea></div>
+  ${T("ed-horario","Horario",o.horario)}${T("ed-req","Requisitos",o.req,5)}${T("ed-cond","Otras condiciones",o.cond)}${T("ed-incentivos","Incentivos",o.incentivos,4)}${T("ed-notas","Notas internas (Ojo)",o.notas)}</div>
+  <div class="acts" style="margin-top:16px"><button class="btn pri" data-a="ed-guardar">Guardar cambios</button><button class="btn" data-a="ed-cancelar">Cancelar</button>${OV[o.id]?'<button class="btn" data-a="ed-reset">Restaurar original</button>':""}</div></div>`}
+function guardaEditor(){
+  const v=id=>$("#"+id).value.trim(),ls=id=>$("#"+id).value.split("\n").map(x=>x.trim()).filter(Boolean);
+  const f={tipo:v("ed-tipo"),jornada:v("ed-jornada"),dias:v("ed-dias"),salario:v("ed-salario"),contrato:v("ed-contrato"),inicio:v("ed-inicio"),formacion:v("ed-formacion"),
+   horario:ls("ed-horario"),req:ls("ed-req"),cond:ls("ed-cond"),incentivos:ls("ed-incentivos"),notas:ls("ed-notas"),
+   mods:ls("ed-mods").map(l=>{const i=l.indexOf("|");return i<0?{n:l,d:""}:{n:l.slice(0,i).trim(),d:l.slice(i+1).trim()}})};
+  if(!f.jornada||!f.salario){alert("Jornada y salario no pueden estar vacíos.");return}
+  editing=false;saveOV(curO.id,f);toast("Condiciones guardadas");if(cloudOn){curO={...curO,...f};pintaFicha()}}
+
+/* ===================== ADMINISTRACIÓN ===================== */
+const EMPS=[...new Set(BASE.map(o=>o.e))];
+function fillAC(){$("#aC").innerHTML=BASE.filter(o=>o.e===$("#aE").value).map(o=>`<option value="${o.c}">${esc(centro(o.c).loc)} · ${o.c}</option>`).join("")}
+$("#aE").innerHTML=EMPS.map(e=>`<option>${e}</option>`).join("");fillAC();$("#aE").onchange=fillAC;
+$("#aGo").onclick=()=>{
+  const need=parseInt($("#aNeed").value,10);
+  if(!(need>=1)){alert("Indica cuántos candidatos necesitas (mínimo 1).");$("#aNeed").focus();return}
+  mut.add({id:"n"+Date.now().toString(36),ord:Date.now(),e:$("#aE").value,c:$("#aC").value,sem:$("#aSem").value.trim()||"Pedido",need,env:0,inc:$("#aInc").value,nota:$("#aNota").value.trim(),tipo:$("#aTipo").value,closed:false});
+  ["aSem","aNeed","aInc","aNota"].forEach(i=>$("#"+i).value="");toast("Pedido creado");afterChange()};
+function pintaAdmin(){
+  $("#aoffers").innerHTML=OFERTAS.map(o=>`<div class="arow"><div>${eb(o.e)} <span class="hint">· ${esc(centro(o.c).loc)} · ${o.c}</span>${OV[o.id]?' <span class="tagp">Modificada</span>':""}</div><button class="btn sm" data-edit="${o.id}">Editar condiciones</button></div>`).join("");
+  const a=[...PED].sort((x,y)=>(y.ord||0)-(x.ord||0));
+  $("#apeds").innerHTML=a.length?a.map(p=>`<div class="arow"><div>${eb(p.e)} <span class="hint">· ${esc(centro(p.c).loc)} · ${p.c} · ${esc(p.sem)}${p.tipo==="Andarín"?" · andarines":""}</span><br><b>${p.env||0}</b>${p.need!=null?" / "+p.need:""} enviados${p.inc?" · incorporación "+fd(p.inc):""}${isDone(p)?' <span class="tagp ok">Completado</span>':""}</div><span class="acts" style="margin:0"><button class="btn sm" data-open="${p.c}-${p.e}">Abrir</button><button class="btn sm" data-del="${p.id}">Eliminar</button></span></div>`).join(""):'<div class="empty">Todavía no hay pedidos. Crea el primero arriba.</div>'}
+$("#v-admin").addEventListener("click",e=>{const b=e.target.closest("[data-edit],[data-open],[data-del]");if(!b)return;
+  if(b.dataset.edit){abre(b.dataset.edit);editing=true;pintaEditor()}
+  else if(b.dataset.open)abre(b.dataset.open);
+  else if(b.dataset.del){const p=PED.find(x=>x.id===b.dataset.del);if(p&&confirm("¿Eliminar este pedido?")){mut.del(p);afterChange()}}});
+
+/* ===================== TODAS LAS OFERTAS ===================== */
+let tmode="of";
+function pintaTodas(){
+  const q=norm($("#tq").value),em=$("#te").value,solo=$("#tab").checked;
+  const abiertos=PED.filter(p=>!isDone(p));
+  $("#sum").innerHTML=`<div><b>${abiertos.length}</b>pedidos abiertos</div><div><b>${abiertos.reduce((n,p)=>n+(p.need!=null?Math.max(0,p.need-(p.env||0)):0),0)}</b>candidatos pendientes</div><div><b>${OFERTAS.length}</b>ofertas (empresa + centro)</div>`;
+  if(tmode==="of"){
+    let a=OFERTAS.filter(o=>(!em||o.e===em)&&(!q||norm([o.e,centro(o.c).loc,o.c,o.tipo].join(" ")).includes(q))&&(!solo||stat(o).ab));
+    if(Z)a.sort((x,y)=>Z.rows.find(r=>r.c.id===x.c).m-Z.rows.find(r=>r.c.id===y.c).m);else a.sort((x,y)=>x.e.localeCompare(y.e)||x.c.localeCompare(y.c));
+    $("#tbl").innerHTML=a.length?`<table><thead><tr><th>Empresa</th><th>Centro</th><th>Jornada</th><th>Salario</th><th>Pedidos</th></tr></thead><tbody>`+a.map(o=>{const c=centro(o.c),s=stat(o),r=Z&&Z.rows.find(r=>r.c.id===o.c);
+      return`<tr class="r" data-o="${o.id}"><td data-l="Empresa">${eb(o.e)}<small>${esc(o.tipo)}</small></td><td data-l="Centro">${esc(c.loc)}<small>${c.id}${r?` · ${fm(r.m,r.e)} desde ${esc(Z.name)}`:""}</small></td><td data-l="Jornada">${esc(o.jornada)}</td><td data-l="Salario">${esc(o.salario.split("·")[0])}</td><td data-l="Pedidos">${badge(o)}${s.prox?`<small>Próxima incorporación: ${fd(s.prox)}</small>`:""}</td></tr>`}).join("")+"</tbody></table>":'<div class="empty">No hay ofertas con ese filtro.</div>';
+  }else{
+    let a=PED.filter(p=>!isDone(p)&&(!em||p.e===em)&&(!q||norm([p.e,centro(p.c).loc,p.c,p.sem,p.nota].join(" ")).includes(q)));
+    a.sort((x,y)=>(x.inc||"9").localeCompare(y.inc||"9")||x.e.localeCompare(y.e));
+    $("#tbl").innerHTML=a.length?`<table><thead><tr><th>Empresa</th><th>Centro</th><th>Pedido</th><th>Enviados</th><th>Incorporación</th></tr></thead><tbody>`+a.map(p=>{const c=centro(p.c),pct=p.need?Math.min(100,Math.round((p.env||0)/p.need*100)):0;
+      return`<tr class="r" data-o="${p.c}-${p.e}"><td data-l="Empresa">${eb(p.e)}</td><td data-l="Centro">${esc(c.loc)}<small>${c.id}</small></td><td data-l="Pedido">${esc(p.sem)}${p.tipo==="Andarín"?" · andarines":""}<small>${esc(p.nota)}</small></td><td data-l="Enviados"><b>${p.env||0}</b>${p.need!=null?` / ${p.need}`:" (sin cifra)"}${p.need?`<div class="bar"><i style="width:${pct}%"></i></div>`:""}</td><td data-l="Incorporación">${p.inc?fd(p.inc):"—"}</td></tr>`}).join("")+"</tbody></table>":'<div class="empty">No hay pedidos abiertos con ese filtro.</div>';
+  }}
+$("#tbl").onclick=e=>{const r=e.target.closest("[data-o]");if(r)abre(r.dataset.o)};
+["tq","te","tab"].forEach(i=>$("#"+i).addEventListener("input",pintaTodas));
+$("#te").innerHTML+=[...new Set(OFERTAS.map(o=>o.e))].map(e=>`<option>${e}</option>`).join("");
+$("#tmode").onclick=e=>{const b=e.target.closest("button");if(!b)return;tmode=b.dataset.m;[...$("#tmode").children].forEach(x=>x.classList.toggle("on",x===b));$("#tab").parentElement.style.display=tmode==="of"?"":"none";pintaTodas()};
+function refresca(){if(Z)pintaZona();pintaOfertas();pintaTodas();if(ADMIN)pintaAdmin()}
+$("#nav").onclick=e=>{const b=e.target.closest("button");if(!b)return;[...$("#nav").children].forEach(x=>x.classList.toggle("on",x===b));
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="v-"+b.dataset.v));if(b.dataset.v==="todas")pintaTodas();if(b.dataset.v==="admin")pintaAdmin();scrollTo(0,0)};
+
+/* ===================== COPIAS ===================== */
+$("#bk-exp").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify({pedidos:PED},null,1)],{type:"application/json"}));a.download="pedidos-"+new Date().toISOString().slice(0,10)+".json";a.click()};
+$("#bk-imp").onclick=()=>$("#bk-file").click();
+$("#bk-file").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);if(!Array.isArray(o.pedidos))throw 0;if(confirm("Esto reemplaza los pedidos actuales"+(cloudOn?" para TODO el equipo":"")+". ¿Continuar?")){replaceAll(o.pedidos);toast("Copia importada")}}catch(x){alert("Archivo no válido")}};r.readAsText(f);e.target.value=""};
+
+pintaOfertas();pintaTodas();cloudInit();
 </script>
-</body></html>
+</body>
+</html>
