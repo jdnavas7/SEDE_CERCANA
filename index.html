@@ -6,7 +6,6 @@
 <title>Centros y ofertas · Barcelona</title>
 <style>
 :root{--bg:#f7f7f4;--panel:#fff;--ink:#14141a;--mut:#6b6b76;--line:#e7e7ea;--soft:#f3f3f6;--acc:#e5173f;--acc-ink:#fff;--ok:#0f9d58;--okbg:#e2f6eb;--warn:#b45309;--warnbg:#fff0cf;--c:#e5173f}
-@media(prefers-color-scheme:dark){:root{--bg:#101014;--panel:#1a1a20;--ink:#f1f1f4;--mut:#9a9aa6;--line:#2c2c35;--soft:#23232b;--acc:#ff4d6d;--ok:#3ddc84;--okbg:#14301f;--warn:#ffb74d;--warnbg:#3a2c10}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
@@ -16,7 +15,8 @@ a{color:var(--acc)}
 header{background:var(--panel);border-bottom:1px solid var(--line)}
 .top{max-width:1180px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .top h1{margin:0;padding:14px 0;font-size:18px;font-weight:700;display:flex;align-items:center;gap:10px}
-.top h1::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--acc);display:inline-block}
+.brand img{height:34px;width:auto;display:block}
+.brand .wm{font-size:22px;letter-spacing:-.01em;color:var(--acc)}
 .top h1 span{font-weight:400;color:var(--mut);font-size:14px}
 nav{display:flex;gap:4px;margin-left:24px}
 nav button{background:none;border:0;color:var(--mut);padding:18px 12px 15px;font-weight:600;border-bottom:3px solid transparent}
@@ -123,7 +123,21 @@ ul.l{margin:0;padding-left:18px}ul.l li{margin:3px 0}
 .pf label{font-size:12px;color:var(--mut);display:block;margin-bottom:2px}
 .pf input,.pf select{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:7px 10px;background:var(--panel)}
 .pf .f{grid-column:1/-1}
+.cnt button.addb{width:auto;height:auto;border-radius:8px;padding:7px 14px;font-size:14px;font-weight:700;margin-left:4px;background:var(--acc);border-color:var(--acc);color:#fff;white-space:nowrap}
+.cnt button.addb:hover{filter:brightness(.92)}
+.cnt{flex-wrap:wrap}
+.okic{width:46px;height:46px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:26px;font-weight:700;margin-bottom:10px}
+.chk{margin:14px 0 4px;border-top:1px solid var(--line)}
+.chk label{display:flex;gap:12px;align-items:flex-start;padding:12px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+.sheet .chk input{width:22px;height:22px;margin:1px 0 0;padding:0;border:0;accent-color:var(--ok);flex:none}
+.chk label span{flex:1;min-width:0}
+#mCheck .chk label{display:flex;margin-top:0;font-size:15px;color:var(--ink)}
+#mCheck .chk label b{font-weight:700}
+.chk small{display:block;color:var(--mut);font-size:12.5px;font-weight:400;margin-top:2px}
+.chk input:checked+span{opacity:.5;text-decoration:line-through}
+#mCheck .sheet{width:min(440px,100%)}
 .pf textarea{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:7px 10px;background:var(--panel);resize:vertical}
+.ht{display:inline-block;font-size:11.5px;font-weight:700;padding:0 7px;border-radius:99px;background:var(--soft);color:var(--mut);margin:3px 4px 0 0;white-space:nowrap}
 .arow{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
 .arow:last-child{border-bottom:0}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
@@ -137,14 +151,143 @@ ul.l{margin:0;padding-left:18px}ul.l li{margin:3px 0}
 .sheet h2{margin:0 0 4px}
 .sheet input{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--panel);margin-top:4px}
 .sheet label{display:block;margin-top:12px;font-size:12px;color:var(--mut)}
+.alt-btn{width:100%;border:2px dashed var(--acc);color:var(--acc);background:transparent;font-weight:800;padding:12px;font-size:13.5px}
+.altbox{border:2px solid var(--acc);border-radius:14px;padding:14px}
+.alth{display:flex;justify-content:space-between;align-items:center;color:var(--acc)}
+.x2{border:0;background:transparent;font-size:22px;line-height:1;cursor:pointer;color:var(--mut)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.zb.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.chk2{display:flex!important;gap:8px;align-items:center;margin-top:12px;font-size:14px!important;color:var(--ink)!important}
+.chk2 input{width:auto!important;margin:0!important}
+.altsub{margin:14px 0 6px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--ink)}
+.altsub.low{color:var(--mut);font-weight:700}
+.altrow{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 10px;border:1.5px solid var(--line);border-radius:10px;margin-bottom:6px;cursor:pointer;background:var(--panel)}
+.altrow:hover{border-color:var(--acc)}
+.altrow.low{opacity:.62;border-style:dashed;padding:6px 10px}
+.altrow.low:hover{opacity:1}
+
+/* ===== REDISEÑO v2: verde = pedido activo, microinteracciones ===== */
+:root{--live:#12b76a;--live-d:#0b7f49;--livebg:#ecfaf3;--livebr:#9fe3c1;--sh1:0 1px 2px rgba(20,20,40,.05),0 1px 1px rgba(20,20,40,.03);--sh2:0 10px 28px -10px rgba(20,20,40,.22),0 3px 8px -3px rgba(20,20,40,.08);--ease:cubic-bezier(.2,.7,.2,1)}
+body{background:radial-gradient(1200px 500px at 85% -10%,color-mix(in srgb,var(--acc) 7%,transparent),transparent 60%),var(--bg)}
+header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--panel) 88%,transparent);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);box-shadow:var(--sh1)}
+header::after{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--acc),#ff8a3d 45%,var(--live) 100%);opacity:.9}
+nav button{position:relative;border-bottom:0;transition:color .15s}
+nav button::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
+nav button:hover::after{transform:scaleX(.45)}nav button.on::after{transform:scaleX(1)}
+nav button.on{border-bottom:0}
+.box{border-radius:18px;box-shadow:var(--sh1);transition:box-shadow .2s,transform .2s var(--ease)}
+.box:hover{box-shadow:var(--sh2)}
+.box h2 i{background:linear-gradient(135deg,var(--acc),#ff7a45);box-shadow:0 3px 8px -2px color-mix(in srgb,var(--acc) 55%,transparent)}
+.btn{transition:transform .15s var(--ease),box-shadow .15s,border-color .15s,background .15s,filter .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 14px -6px rgba(20,20,40,.3)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn.pri{background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 92%,#fff),var(--acc));box-shadow:0 4px 12px -4px color-mix(in srgb,var(--acc) 60%,transparent)}
+.zb{transition:all .18s var(--ease)}
+.zb:hover{transform:translateY(-2px);box-shadow:0 6px 12px -6px color-mix(in srgb,var(--acc) 70%,transparent)}
+.sform input{border-radius:12px;transition:border-color .15s,box-shadow .15s}
+
+/* verde = pedido activo */
+.tagp{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:2px 10px;border-radius:99px;background:var(--livebg);color:var(--live-d);border:1px solid var(--livebr)}
+.tagp::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 color-mix(in srgb,var(--live) 55%,transparent);animation:pulse 1.8s infinite}
+.tagp.ok{background:var(--soft);color:var(--mut);border-color:var(--line)}.tagp.ok::before{content:"✓";width:auto;height:auto;background:none;animation:none;font-size:11px}
+.tagp.none{background:transparent;color:var(--mut);border:1px dashed var(--line)}.tagp.none::before{background:var(--line);animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--live) 55%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* centros */
+.crow{border-radius:14px;border-left:5px solid transparent;box-shadow:var(--sh1);transition:transform .2s var(--ease),box-shadow .2s,border-color .2s,background .2s;animation:rise .35s var(--ease) both}
+.crow:hover{transform:translateY(-2px);box-shadow:var(--sh2);border-color:var(--line)}
+.crow.live{border-left-color:var(--live);background:linear-gradient(90deg,var(--livebg),var(--panel) 55%)}
+.crow.live:hover{border-color:var(--livebr);border-left-color:var(--live)}
+.crow.sel{border-color:var(--acc);border-left-color:var(--acc);background:color-mix(in srgb,var(--acc) 6%,var(--panel));box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 14%,transparent)}
+.crow.live.sel{border-color:var(--live);border-left-color:var(--live);background:var(--livebg);box-shadow:0 0 0 3px color-mix(in srgb,var(--live) 18%,transparent)}
+.rk{width:26px;height:26px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:13px}
+.crow:first-child .rk{background:var(--acc);color:#fff}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.crow:nth-child(2){animation-delay:.04s}.crow:nth-child(3){animation-delay:.08s}.crow:nth-child(4){animation-delay:.12s}.crow:nth-child(5){animation-delay:.16s}.crow:nth-child(n+6){animation-delay:.2s}
+
+/* ofertas de un centro */
+.orow{position:relative;border-radius:16px;border:1.5px solid var(--line);border-left:6px solid var(--c);box-shadow:var(--sh1);transition:transform .2s var(--ease),box-shadow .2s,border-color .2s,background .2s;animation:rise .35s var(--ease) both}
+.orow:hover{transform:translateY(-3px);box-shadow:var(--sh2);border-color:var(--c)}
+.orow .go{opacity:.55;transform:translateX(-4px);transition:all .2s var(--ease)}
+.orow:hover .go{opacity:1;transform:none}
+.orow.live{background:linear-gradient(135deg,var(--livebg),var(--panel) 60%);border-color:var(--livebr);border-left-color:var(--live)}
+.orow.live:hover{border-color:var(--live)}
+.orow.live::after{content:"PEDIDO ABIERTO";position:absolute;right:14px;bottom:12px;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:var(--live-d)}
+.orow:not(.live){opacity:.92}
+
+/* tabla */
+table{border-radius:16px;box-shadow:var(--sh1)}
+tr.r td{transition:background .15s}
+tr.r td:first-child{box-shadow:inset 4px 0 0 transparent;transition:box-shadow .2s,background .15s}
+tr.r:hover td{background:var(--soft)}tr.r:hover td:first-child{box-shadow:inset 4px 0 0 var(--acc)}
+tr.r.live td{background:var(--livebg)}
+tr.r.live td:first-child{box-shadow:inset 4px 0 0 var(--live)}
+tr.r.live:hover td{background:color-mix(in srgb,var(--live) 12%,var(--panel))}
+tr.r:not(.live) .eb{opacity:.9}
+.sum div{border-radius:16px;box-shadow:var(--sh1);transition:transform .2s var(--ease),box-shadow .2s}
+.sum div:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.sum div:nth-child(1){border-color:var(--livebr);background:linear-gradient(135deg,var(--livebg),var(--panel))}
+.sum div:nth-child(1) b{color:var(--live-d)}
+.bar{height:7px}.bar i{background:linear-gradient(90deg,var(--live),#5eead4);transition:width .4s var(--ease)}
+
+/* ficha lateral */
+#dr{border-radius:20px 0 0 20px;transition:transform .3s var(--ease)}
+.dh{background:linear-gradient(180deg,color-mix(in srgb,var(--c) 9%,var(--panel)),var(--panel))}
+.mod{border-radius:12px;box-shadow:var(--sh1)}
+.ped{border-radius:14px;transition:box-shadow .2s,border-color .2s}
+.ped:not(.done){border-color:var(--livebr);background:linear-gradient(135deg,var(--livebg),var(--panel) 70%);border-left:5px solid var(--live)}
+.ped:hover{box-shadow:var(--sh2)}
+.ped.done{background:var(--soft);border-color:transparent}
+.cnt button:not(.addb){transition:transform .15s var(--ease),background .15s}
+.cnt button:not(.addb):hover{transform:scale(1.1)}
+.altrow{border-radius:12px;transition:transform .15s var(--ease),box-shadow .15s,border-color .15s;border-left:4px solid transparent}
+.altrow:not(.low){border-left-color:var(--live);background:var(--livebg);border-color:var(--livebr)}
+.altrow:hover{transform:translateX(3px);box-shadow:var(--sh1)}
+.arow{transition:background .15s}.arow:hover{background:var(--soft)}
+
+/* ===== v3: todo blanco, cajas redondeadas ===== */
+:root{color-scheme:light;--bg:#f2f3f5;--panel:#fff;--soft:#f6f7f9;--line:#e9eaee;--livebg:#fff;--livebr:#e9eaee}
+body{background:var(--bg)}
+header{background:#fff;backdrop-filter:none}
+header::after{height:2px;background:var(--acc);opacity:1}
+.box,.crow,.orow,.ped,.altrow,.altbox,.sum div,.mod,table{background:#fff!important;border:1px solid var(--line)!important;border-radius:20px!important;box-shadow:0 1px 3px rgba(20,20,40,.06)}
+.crow,.orow,.ped,.altrow{border-radius:16px!important}
+.mod{border-radius:14px!important}
+.crow:hover,.orow:hover,.altrow:hover,.sum div:hover,.ped:hover{box-shadow:0 10px 26px -10px rgba(20,20,40,.25);border-color:#d9dbe1!important}
+/* activo = solo acento verde fino + etiqueta, caja blanca */
+.crow.live,.orow.live,.ped:not(.done),.altrow:not(.low){background:#fff!important;border:1px solid var(--line)!important}
+.crow.live{border-left:5px solid var(--live)!important}
+.orow{border-left:6px solid var(--c)!important}
+.orow.live{border-left:6px solid var(--live)!important}
+.ped:not(.done){border-left:5px solid var(--live)!important}
+.altrow:not(.low){border-left:4px solid var(--live)!important}
+.crow.sel,.crow.live.sel{background:#fff!important;border-color:var(--acc)!important;border-left:5px solid var(--acc)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 12%,transparent)}
+.crow.live.sel{border-left-color:var(--live)!important}
+.ped.done{background:#fff!important}
+tr.r.live td{background:#fff}tr.r.live:hover td,tr.r:hover td{background:var(--soft)}
+th{background:#fff}
+table{overflow:hidden}
+.sum div:nth-child(1){background:#fff!important;border-color:var(--line)!important}
+.dh{background:#fff}
+.key{border-radius:14px}
+.zb,.btn,.sform input,.toolbar input,.toolbar select{border-radius:14px}
+.zb{border-radius:99px}
+.rk{background:var(--soft)}
+.min{color:var(--live-d)}.min.a{color:#e08600}.min.r{color:var(--acc)}
+.hl{margin-top:3px}.hl div{font-weight:600;font-size:13.5px;padding:2px 0}
+.hk{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--acc);margin-bottom:2px}
+.gsep{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin:14px 2px 8px}
+.gsep.live{color:var(--live-d);margin-top:4px}
 </style>
 </head>
 <body>
 <header><div class="top">
-  <h1>Centros y ofertas<span>Barcelona · Última milla</span></h1>
+  <h1 class="brand"><img id="logo" src="logo.png" alt="Adecco" onerror="this.outerHTML='<b class=wm>Adecco</b>'"><span>Barcelona · Última milla</span></h1>
   <nav id="nav"><button data-v="buscar" class="on">Buscar por zona</button><button data-v="todas">Todas las ofertas</button><button data-v="admin" id="navAdmin" hidden>Administración</button></nav>
   <div class="who"><span id="cstat"></span><button class="btn sm" id="btnOut" hidden>Salir</button></div>
 </div></header>
+<div class="modal" id="mCheck"><div class="sheet"></div></div>
 <div class="modal" id="mLogin"><div class="sheet"><h2>Acceso del equipo</h2><div class="hint">Entra con el usuario que te haya dado el administrador.</div>
  <label>Correo</label><input id="lMail" type="email" autocomplete="username"><label>Contraseña</label><input id="lPass" type="password" autocomplete="current-password">
  <div id="lErr" style="color:var(--acc);font-weight:600;margin-top:8px;min-height:20px"></div>
@@ -181,6 +324,7 @@ ul.l{margin:0;padding-left:18px}ul.l li{margin:3px 0}
   <div class="seg" id="tmode"><button data-m="of" class="on">Ofertas</button><button data-m="pe">Pedidos</button></div>
   <input id="tq" placeholder="Filtrar…" style="flex:1;min-width:140px">
   <select id="te"><option value="">Todas las empresas</option></select>
+  <select id="th"><option value="">Todos los horarios</option><option value="rot">Rotativo</option><option value="1119">De 11 a 19</option><option value="man">Solo de mañana</option><option value="tar">Solo de tarde</option></select>
   <label><input type="checkbox" id="tab" checked> Solo con pedidos abiertos</label>
  </div>
  <div id="tbl"></div>
@@ -278,9 +422,27 @@ Object.entries({"hospitalet":"L'Hospitalet de Llobregat","prat":"El Prat de Llob
 function km(a,b){const R=6371,r=x=>x*Math.PI/180,A=r(b[0]-a[0]),B=r(b[1]-a[1]);const h=Math.sin(A/2)**2+Math.cos(r(a[0]))*Math.cos(r(b[0]))*Math.sin(B/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
 const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),2200)};
 const fd=iso=>{if(!iso)return"";const[y,m,d]=iso.split("-");return d+"/"+m};
-const ECOL={"NOPAR":"#2563eb","INSTAPACK":"#f97316","WINIW":"#10b981","JOM SERVICE":"#d946ef"};
+const ECOL={"NOPAR":"#2563eb","INSTAPACK":"#f97316","WINIW":"#0891b2","JOM SERVICE":"#d946ef"};
 const ec=e=>ECOL[e]||"#e5173f";
 const eb=e=>`<span class="eb" style="--c:${ec(e)}">${esc(e)}</span>`;
+const HLAB={rot:"Rotativo","1119":"De 11 a 19",man:"Mañana",tar:"Tarde"};
+function hTags(o){
+  const lines=[...(o.horario||[]),...(o.mods||[]).map(m=>m.n+" "+m.d)],t=new Set();
+  lines.forEach(l=>{const x=l.toLowerCase();
+    if(/rotativ/.test(x))t.add("rot");
+    else{const m=/ma[ñn]ana/.test(x),a=/tarde/.test(x);if(m)t.add("man");if(a)t.add("tar")}
+    if(/\b(10\/11|10-11|11:00)\b.{0,12}\b(18\/19|18-19|19:00)/.test(x))t.add("1119")});
+  return[...t]}
+/* líneas de horario que encajan con un filtro (mañana/tarde/11-19/rotativo), partidas por segmentos */
+function tagsOf(str){const x=str.toLowerCase(),t=new Set();
+  if(/rotativ/.test(x))t.add("rot");else{if(/ma[ñn]ana/.test(x))t.add("man");if(/tarde/.test(x))t.add("tar")}
+  if(/\b(10\/11|10-11|11:00)\b.{0,12}\b(18\/19|18-19|19:00)/.test(x))t.add("1119");return t}
+function hLines(o,k){const out=[];
+  (o.mods||[]).forEach(m=>{const seg=m.d.split(" · ").filter(sg=>tagsOf(m.n+" "+sg).has(k));if(seg.length)out.push(m.n+": "+seg.join(" · "))});
+  (o.horario||[]).forEach(l=>{if(tagsOf(l).has(k))out.push(l)});
+  return out}
+const hlHTML=(o,k)=>`<div class="hl"><span class="hk">Solo ${HLAB[k].toLowerCase()}</span>${hLines(o,k).map(l=>`<div>${esc(l)}</div>`).join("")}</div>`;
+const hchips=o=>hTags(o).map(k=>`<span class="ht">${HLAB[k]}</span>`).join("");
 const centro=id=>CENTROS.find(c=>c.id===id);
 const cname=c=>c.loc+" · "+c.id;
 
@@ -356,7 +518,7 @@ function stat(o){
   return{ab:ab.length,faltan,sinCifra,prox};
 }
 function badge(o){const s=stat(o);
-  if(!s.ab)return'<span class="tagp ok">Sin pedidos abiertos</span>';
+  if(!s.ab)return'<span class="tagp none">Sin pedido</span>';
   return`<span class="tagp">${s.ab} pedido${s.ab>1?"s":""} abierto${s.ab>1?"s":""}${s.faltan?` · faltan ${s.faltan}`:""}${s.sinCifra?" · hay pedidos sin cifra":""}</span>`}
 
 /* ===================== MINUTOS EN COCHE ===================== */
@@ -389,11 +551,13 @@ async function buscar(q,pre){
   const real=await routeAll(g.ll);if(my!==seq||!real)return;Z.rows=real;pintaZona();
 }
 function pintaZona(){
-  const rows=[...Z.rows].sort((a,b)=>a.m-b.m);
-  $("#zinfo").innerHTML=`Desde <b>${esc(Z.name)}</b>, ordenados por tiempo de viaje. Pulsa un centro para ver sus ofertas.`;
+  const live=x=>OFERTAS.some(o=>o.c===x.c.id&&stat(o).ab>0);
+  const rows=[...Z.rows].sort((a,b)=>live(b)-live(a)||a.m-b.m);const nLive=rows.filter(live).length;
+  $("#zinfo").innerHTML=`Desde <b>${esc(Z.name)}</b>, primero los que tienen pedido abierto y después el resto, siempre por tiempo de viaje. Pulsa un centro para ver sus ofertas.`;
   $("#clist").innerHTML=rows.map((x,i)=>{
     const ofs=OFERTAS.filter(o=>o.c===x.c.id);
-    return`<button class="crow ${selC===x.c.id?"sel":""}" data-c="${x.c.id}"><span class="rk">${i+1}</span>
+    const sep=nLive>0&&i===nLive?'<div class="gsep">Sin pedido abierto · captación anticipada</div>':(i===0&&nLive>0?'<div class="gsep live">Con pedido abierto</div>':"");
+    return sep+`<button class="crow ${ofs.some(o=>stat(o).ab)?"live":""} ${selC===x.c.id?"sel":""}" data-c="${x.c.id}"><span class="rk">${i+1}</span>
     <span class="cn">${esc(x.c.loc)}<small>${x.c.id}</small></span>
     <span class="min ${x.m<=25?"":x.m<=45?"a":"r"}">${fm(x.m,x.e).replace(" min","")}<small>min</small><em>${x.k} km${x.e?" aprox.":""}</em></span>
     <span class="csub">${ofs.map(o=>{const s=stat(o);return`<span>${eb(o.e)}${s.ab?` <span class="tagp">${s.faltan?"faltan "+s.faltan:s.ab+" abierto"+(s.ab>1?"s":"")}</span>`:""}</span>`}).join("")}</span></button>`}).join("")}
@@ -402,13 +566,13 @@ $("#clist").onclick=e=>{const b=e.target.closest("[data-c]");if(!b)return;selC=b
 function pintaOfertas(){
   const box=$("#ofs");
   if(!selC){box.className="empty";box.innerHTML=Z?"Elige un centro de la lista para ver sus ofertas.":"Busca una zona y elige un centro de la lista para ver qué empresas tienen oferta ahí.";return}
-  const c=centro(selC),ofs=OFERTAS.filter(o=>o.c===selC),row=Z&&Z.rows.find(r=>r.c.id===selC);
+  const c=centro(selC),ofs=OFERTAS.filter(o=>o.c===selC).sort((a,b)=>(stat(b).ab>0)-(stat(a).ab>0)),row=Z&&Z.rows.find(r=>r.c.id===selC);
   box.className="";
   box.innerHTML=`<div style="margin-bottom:4px"><b style="font-size:17px">${esc(c.loc)}</b> <span class="hint">· centro ${c.id}${c.aprox?" · ubicación aproximada":""}</span></div>
    ${row?`<div class="hint">${fm(row.m,row.e)} en coche desde ${esc(Z.name)} · <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=${Z.ll[0]},${Z.ll[1]}&destination=${c.lat},${c.lng}&travelmode=transit">ver ruta en transporte público</a></div>`:""}
    <div style="margin-top:12px;font-weight:600">${ofs.length>1?`Hay ${ofs.length} empresas en este centro. Elige una para ver la oferta completa:`:"Oferta en este centro:"}</div>`+
-   ofs.map(o=>`<button class="orow" data-o="${o.id}" style="--c:${ec(o.e)}"><span class="go">Ver oferta completa ›</span><b>${o.e}</b>
-    <div>${esc(o.tipo)} · ${esc(o.jornada)}</div><div>${esc(o.salario)}</div><div style="margin-top:5px">${badge(o)}</div></button>`).join("")}
+   ofs.map(o=>`<button class="orow ${stat(o).ab?"live":""}" data-o="${o.id}" style="--c:${ec(o.e)}"><span class="go">Ver oferta completa ›</span><b>${o.e}</b>
+    <div>${esc(o.tipo)} · ${esc(o.jornada)}</div><div>${hchips(o)}</div><div>${esc(o.salario)}</div><div style="margin-top:5px">${badge(o)}</div></button>`).join("")}
 $("#ofs").onclick=e=>{const b=e.target.closest("[data-o]");if(b)abre(b.dataset.o)};
 $("#f").onsubmit=e=>{e.preventDefault();buscar($("#q").value)};
 let sugT,sugN=0,sugL=[];
@@ -422,8 +586,8 @@ $("#quick").innerHTML=["Sant Andreu","Nou Barris","Sant Martí","Sants","Eixampl
 $("#quick").onclick=e=>{const z=e.target.dataset.z;if(z){$("#q").value=z;buscar(z)}};
 
 /* ===================== FICHA DE OFERTA ===================== */
-let curO=null,showForm=false;
-function abre(id){curO=OFERTAS.find(o=>o.id===id);editing=false;pintaFicha();document.body.classList.add("open");$("#dr").setAttribute("aria-hidden","false");$("#dr").scrollTop=0}
+let curO=null,showForm=false,ALT={on:false,h:null,nc:false};
+function abre(id){curO=OFERTAS.find(o=>o.id===id);editing=false;ALT={on:false,h:null,nc:false};pintaFicha();document.body.classList.add("open");$("#dr").setAttribute("aria-hidden","false");$("#dr").scrollTop=0}
 function cierra(){editing=false;document.body.classList.remove("open");$("#dr").setAttribute("aria-hidden","true");curO=null;refresca()}
 $("#ov").onclick=cierra;document.addEventListener("keydown",e=>{if(e.key==="Escape"&&curO)cierra()});
 const li=a=>a&&a.length?`<ul class="l">${a.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:"";
@@ -431,7 +595,7 @@ function pedHTML(p){
   const d=isDone(p),pct=p.need?Math.min(100,Math.round((p.env||0)/p.need*100)):0;
   return`<div class="ped ${d?"done":""}" data-p="${p.id}">
    <div class="ph"><b>Pedido ${esc(p.sem)}${p.tipo==="Andarín"?" · andarines":""}</b><span>${d?'<span class="tagp ok">Completado</span>':'<span class="tagp">Abierto</span>'}</span></div>
-   <div class="cnt"><button data-a="menos" aria-label="Restar enviado">−</button><span>${p.env||0}${p.need!=null?`<small> / ${p.need}</small>`:""}</span><button data-a="mas" aria-label="Sumar enviado">+</button>
+   <div class="cnt"><button data-a="menos" aria-label="Restar enviado">−</button><span>${p.env||0}${p.need!=null?`<small> / ${p.need}</small>`:""}</span>${d?"":'<button class="btn pri sm addb" data-a="mas">+ Añadir candidato</button>'}
     <span class="hint" style="min-width:0;text-align:left;font-weight:400;font-size:13px">enviados a delegación${p.need!=null&&!d?` · faltan ${Math.max(0,p.need-(p.env||0))}`:""}${p.need==null?" · sin cifra de pedido":""}</span></div>
    ${p.need?`<div class="bar ${d?"done":""}"><i style="width:${pct}%"></i></div>`:""}
    <div class="hint" style="margin-top:6px">${p.inc?`Incorporación: <b style="color:var(--ink)">${fd(p.inc)}</b>`:"Sin fecha de incorporación"}${p.nota?` · ${esc(p.nota)}`:""}</div>
@@ -453,36 +617,85 @@ function pintaFicha(){
      ${o.formacion?`<dt>Formación</dt><dd>${esc(o.formacion)}</dd>`:""}</dl></div>
    ${o.mods?`<div class="sec"><h4>Modalidades y horarios</h4><div class="mod">${o.mods.map(m=>`<div class="h">${esc(m.n)}</div><div>${esc(m.d)}</div>`).join("")}</div></div>`:""}
    ${o.horario?`<div class="sec"><h4>Horario</h4>${li(o.horario)}</div>`:""}
-   <div class="sec"><h4>Requisitos</h4>${li(o.req)}</div>
-   ${o.cond?`<div class="sec"><h4>Otras condiciones</h4>${li(o.cond)}</div>`:""}
+   <div class="sec"><h4>Requisitos (uso interno)</h4>${li(o.req)}</div>
+   ${o.cond?`<div class="sec"><h4>Otras condiciones (uso interno)</h4>${li(o.cond)}</div>`:""}
    ${o.incentivos?`<div class="sec"><h4>Incentivos</h4>${li(o.incentivos)}</div>`:""}
    ${o.notas?`<div class="sec"><h4>Ojo</h4>${li(o.notas)}</div>`:""}
-   <div class="acts" style="margin-top:16px"><button class="btn pri" data-a="copiar">Copiar oferta para enviar</button>${ADMIN?'<button class="btn" data-a="editar">Editar condiciones</button>':""}<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${c.lat},${c.lng}" style="text-decoration:none;color:inherit">Ver centro en el mapa</a></div>
+   <div class="acts" style="margin-top:16px"><button class="btn pri" data-a="copiar">Copiar condiciones para el candidato</button>${ADMIN?'<button class="btn" data-a="editar">Editar condiciones</button>':""}<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${c.lat},${c.lng}" style="text-decoration:none;color:inherit">Ver centro en el mapa</a></div>
+   <div class="hint" style="margin-top:6px">Al copiar solo se incluyen las condiciones generales (jornada, salario, contrato, horarios e incentivos). Los requisitos no se envían al candidato.</div>
+   <div class="sec alt" id="alt">${altHTML()}</div>
    <div class="sec"><h4>Pedidos de este centro (${ab.length} abierto${ab.length===1?"":"s"})</h4>
     ${ab.map(pedHTML).join("")||'<div class="hint" style="margin-bottom:8px">No hay pedidos abiertos.</div>'}
     ${ADMIN?'<button class="btn" data-a="nuevop">+ Crear pedido para esta oferta</button>':""}
     ${ce.length?`<details style="margin-top:12px"><summary class="hint" style="cursor:pointer">Pedidos completados (${ce.length})</summary><div style="margin-top:8px">${ce.map(pedHTML).join("")}</div></details>`:""}
    </div></div>`}
+/* ---- ¿No puede en ese horario? / sin carnet -> otras ofertas ---- */
+const esAnd=o=>/andar/i.test(o.tipo)||PED.some(p=>p.e===o.e&&p.c===o.c&&p.tipo==="Andarín"&&!isDone(p));
+function altList(){
+  const dist=c=>{const r=Z&&Z.rows.find(r=>r.c.id===c);return r?r:null};
+  return OFERTAS.filter(o=>o.id!==curO.id&&(!ALT.h||hTags(o).includes(ALT.h))&&(!ALT.nc||esAnd(o)))
+    .map(o=>({o,s:stat(o),d:dist(o.c)}))
+    .sort((a,b)=>(b.s.ab>0)-(a.s.ab>0)||(a.d&&b.d?a.d.m-b.d.m:0)||a.o.e.localeCompare(b.o.e))}
+function altHTML(){
+  if(!ALT.on)return`<button class="btn alt-btn" data-a="altabrir">¿NO PUEDE EN ESE HORARIO O NO TIENE CARNET?</button>`;
+  const ch=(k,t)=>`<button type="button" class="zb ${ALT.h===k?"on":""}" data-a="alth" data-k="${k}">${t}</button>`;
+  const L=altList(),con=L.filter(x=>x.s.ab>0),sin=L.filter(x=>!x.s.ab);
+  const row=x=>{const{o,s,d}=x,c=centro(o.c);return`<div class="altrow ${s.ab?"":"low"}" data-go="${o.id}">
+    <div>${eb(o.e)} <b>${esc(c.loc)}</b> <span class="hint">${c.id}${d?" · "+fm(d.m,d.e):""}</span><div>${ALT.h?hlHTML(o,ALT.h):hchips(o)}${esAnd(o)?'<span class="ht">Andarín</span>':""}</div></div>
+    ${s.ab?`<span class="tagp">Pedido abierto${s.faltan?" · faltan "+s.faltan:""}</span>`:'<span class="hint">Sin pedido</span>'}</div>`};
+  return`<div class="altbox"><div class="alth"><b>¿No puede en ese horario o no tiene carnet?</b><button class="x2" data-a="altcerrar" aria-label="Cerrar">×</button></div>
+   <div class="hint" style="margin:6px 0 8px">Disponibilidad del candidato</div>
+   <div class="chips">${ch("man","Solo mañana")}${ch("tar","Solo tarde")}${ch("1119","De 11 a 19")}${ch("rot","Rotativo")}</div>
+   <label class="chk2"><input type="checkbox" data-a="altnc" ${ALT.nc?"checked":""}> No tiene carnet de conducir (andarín)</label>
+   ${!ALT.h&&!ALT.nc?'<div class="hint">Elige una opción para ver otras ofertas.</div>':`
+   <div class="altsub">Con pedido abierto (${con.length})</div>${con.map(row).join("")||'<div class="hint">Ninguna con pedido abierto.</div>'}
+   ${sin.length?`<div class="altsub low">Sin pedido ahora · captación anticipada (${sin.length})</div>${sin.map(row).join("")}`:""}
+   ${ALT.nc&&!L.length?'<div class="hint">Ahora mismo no hay ofertas de andarín.</div>':""}`}</div>`}
+function pintaAlt(){const e=$("#alt");if(e)e.innerHTML=altHTML()}
 function textoOferta(o){const c=centro(o.c);
-  return[`${o.e} · ${c.loc} (centro ${c.id})`,`Tipo: ${o.tipo}`,`Jornada: ${o.jornada}`,`Días: ${o.dias}`,`Salario: ${o.salario}`,`Contrato: ${o.contrato}`,o.inicio?`Inicio: ${o.inicio}`:"",o.formacion?`Formación: ${o.formacion}`:"",
-   o.mods?"Modalidades:\n"+o.mods.map(m=>`- ${m.n}: ${m.d}`).join("\n"):"",o.horario?"Horario:\n"+o.horario.map(x=>"- "+x).join("\n"):"",
-   "Requisitos:\n"+o.req.map(x=>"- "+x).join("\n"),o.cond?"Otras condiciones:\n"+o.cond.map(x=>"- "+x).join("\n"):"",
+  /* Solo condiciones generales: sin requisitos internos (edad, puntos, antigüedad del carnet…) */
+  return[`Oferta de empleo · ${o.e} · ${c.loc}`,`Puesto: repartidor/a (${o.tipo.split(" · ")[0].toLowerCase()})`,`Jornada: ${o.jornada}`,`Días: ${o.dias}`,`Salario: ${o.salario}`,`Contrato: ${o.contrato}`,o.inicio?`Inicio: ${o.inicio}`:"",o.formacion?`Formación: ${o.formacion}`:"",
+   o.mods?"Modalidades y horarios:\n"+o.mods.map(m=>`- ${m.n}: ${m.d}`).join("\n"):"",o.horario?"Horario:\n"+o.horario.map(x=>"- "+x).join("\n"):"",
    o.incentivos?"Incentivos:\n"+o.incentivos.map(x=>"- "+x).join("\n"):""].filter(Boolean).join("\n")}
+$("#dr").addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){const k={...ALT};abre(g.dataset.go);ALT=k;pintaAlt()}});
 $("#dr").addEventListener("click",async e=>{
   const b=e.target.closest("[data-a]");if(!b||!curO)return;const a=b.dataset.a,pid=b.closest("[data-p]")?.dataset.p,p=PED.find(x=>x.id===pid);
   if(a==="copiar"){const t=textoOferta(curO);try{await navigator.clipboard.writeText(t)}catch(x){const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove()}toast("Oferta copiada");return}
+  if(a==="altabrir"){ALT.on=true;pintaAlt();return}
+  if(a==="altcerrar"){ALT={on:false,h:null,nc:false};pintaAlt();return}
+  if(a==="alth"){ALT.h=ALT.h===b.dataset.k?null:b.dataset.k;pintaAlt();return}
+  if(a==="altnc"){ALT.nc=b.checked;pintaAlt();return}
   if(a==="editar"){editing=true;pintaEditor();$("#dr").scrollTop=0;return}
   if(a==="ed-cancelar"){editing=false;pintaFicha();return}
   if(a==="ed-guardar"){guardaEditor();return}
   if(a==="ed-reset"){if(confirm("¿Volver a las condiciones originales de esta oferta?")){editing=false;resetOV(curO.id);toast("Condiciones restauradas");if(cloudOn)pintaFicha()}return}
   if(a==="nuevop"){const o=curO;cierra();document.querySelector("#nav [data-v=admin]").click();$("#aE").value=o.e;fillAC();$("#aC").value=o.c;$("#aSem").focus();return}
   if(p){
-    if(a==="mas"){if(p.need!=null&&(p.env||0)+1===p.need)toast("Pedido completo");mut.inc(p,1)}
+    if(a==="mas"){const n=(p.env||0)+1;mut.inc(p,1);abrirChecklist(p,n)}
     else if(a==="menos"){if((p.env||0)>0)mut.inc(p,-1)}
     else if(a==="cerrar")mut.set(p,{closed:true});
     else if(a==="abrir")mut.set(p,p.need!=null&&p.env>=p.need?{closed:false,env:p.need-1}:{closed:false});
     else if(a==="borrar"){if(!confirm("¿Eliminar este pedido?"))return;mut.del(p)}}
   afterChange()});
+
+/* ===================== CHECKLIST AL AÑADIR CANDIDATO ===================== */
+let chkP=null;
+function abrirChecklist(p,n){
+  chkP=p;const c=centro(p.c),comp=p.need!=null&&n>=p.need;
+  const tareas=[["Actualizar Excel",""],["Actualizar candidatos",""],["Enviar correo","solicitando la documentación: DNI/NIE y carnet de conducir (ambas caras), foto profesional, certificado de puntos, nº de Seguridad Social e IBAN"]];
+  $("#mCheck .sheet").innerHTML=`<div class="okic">✓</div><h2>Candidato añadido</h2>
+   <div class="hint">${eb(p.e)} · ${esc(c.loc)} (${c.id}) · Pedido ${esc(p.sem)}</div>
+   <div style="margin-top:10px;font-size:15px"><b style="font-size:24px">${n}</b>${p.need!=null?" / "+p.need:""} enviados${comp?' &nbsp;<span class="tagp ok">Pedido completo</span>':""}</div>
+   <div class="chk">${tareas.map(([t,h])=>`<label><input type="checkbox"><span><b>${t}</b>${h?" "+h.split(":")[0]:""}${h?`<small>${esc(h.slice(h.indexOf(":")+2))}</small>`:""}</span></label>`).join("")}</div>
+   <div class="acts" style="margin-top:14px"><button class="btn pri" id="chkOk">Cerrar y hacerlo luego</button><button class="btn" id="chkUndo">Deshacer</button></div>`;
+  $("#mCheck").classList.add("on");
+  const upd=()=>{const all=[...document.querySelectorAll("#mCheck .chk input")].every(i=>i.checked);$("#chkOk").textContent=all?"Listo":"Cerrar y hacerlo luego"};
+  document.querySelectorAll("#mCheck .chk input").forEach(i=>i.onchange=upd);
+  $("#chkOk").onclick=cierraChecklist;
+  $("#chkUndo").onclick=()=>{if(chkP&&(chkP.env||0)>0||cloudOn)mut.inc(chkP,-1);cierraChecklist();toast("Candidato quitado");afterChange()}}
+function cierraChecklist(){$("#mCheck").classList.remove("on");chkP=null}
+$("#mCheck").addEventListener("mousedown",e=>{if(e.target.id==="mCheck")cierraChecklist()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#mCheck").classList.contains("on"))cierraChecklist()});
 
 /* ===================== EDITOR DE CONDICIONES (admin) ===================== */
 function pintaEditor(){
@@ -491,7 +704,7 @@ function pintaEditor(){
   <div class="db" style="--c:${ec(o.e)}"><div class="hint" style="margin-top:14px">Los cambios los verá todo el equipo. Para quitar un apartado, déjalo vacío.</div>
   <div class="pf">${I("ed-tipo","Tipo",o.tipo,1)}${I("ed-jornada","Jornada",o.jornada,1)}${I("ed-dias","Días",o.dias,1)}${I("ed-salario","Salario",o.salario,1)}${I("ed-contrato","Contrato",o.contrato,1)}${I("ed-inicio","Inicio",o.inicio,1)}${I("ed-formacion","Formación",o.formacion,1)}
   <div class="f"><label>Modalidades y horarios <span style="opacity:.7">(una por línea: «20 h | Mañana 7 a 11 h»)</span></label><textarea id="ed-mods" rows="3">${esc((o.mods||[]).map(m=>m.n+" | "+m.d).join("\n"))}</textarea></div>
-  ${T("ed-horario","Horario",o.horario)}${T("ed-req","Requisitos",o.req,5)}${T("ed-cond","Otras condiciones",o.cond)}${T("ed-incentivos","Incentivos",o.incentivos,4)}${T("ed-notas","Notas internas (Ojo)",o.notas)}</div>
+  ${T("ed-horario","Horario",o.horario)}${T("ed-req","Requisitos (internos: no se copian al candidato)",o.req,5)}${T("ed-cond","Otras condiciones (internas)",o.cond)}${T("ed-incentivos","Incentivos",o.incentivos,4)}${T("ed-notas","Notas internas (Ojo)",o.notas)}</div>
   <div class="acts" style="margin-top:16px"><button class="btn pri" data-a="ed-guardar">Guardar cambios</button><button class="btn" data-a="ed-cancelar">Cancelar</button>${OV[o.id]?'<button class="btn" data-a="ed-reset">Restaurar original</button>':""}</div></div>`}
 function guardaEditor(){
   const v=id=>$("#"+id).value.trim(),ls=id=>$("#"+id).value.split("\n").map(x=>x.trim()).filter(Boolean);
@@ -522,22 +735,22 @@ $("#v-admin").addEventListener("click",e=>{const b=e.target.closest("[data-edit]
 /* ===================== TODAS LAS OFERTAS ===================== */
 let tmode="of";
 function pintaTodas(){
-  const q=norm($("#tq").value),em=$("#te").value,solo=$("#tab").checked;
+  const q=norm($("#tq").value),em=$("#te").value,hf=$("#th").value,solo=$("#tab").checked;
   const abiertos=PED.filter(p=>!isDone(p));
   $("#sum").innerHTML=`<div><b>${abiertos.length}</b>pedidos abiertos</div><div><b>${abiertos.reduce((n,p)=>n+(p.need!=null?Math.max(0,p.need-(p.env||0)):0),0)}</b>candidatos pendientes</div><div><b>${OFERTAS.length}</b>ofertas (empresa + centro)</div>`;
   if(tmode==="of"){
-    let a=OFERTAS.filter(o=>(!em||o.e===em)&&(!q||norm([o.e,centro(o.c).loc,o.c,o.tipo].join(" ")).includes(q))&&(!solo||stat(o).ab));
+    let a=OFERTAS.filter(o=>(!em||o.e===em)&&(!q||norm([o.e,centro(o.c).loc,o.c,o.tipo].join(" ")).includes(q))&&(!hf||hTags(o).includes(hf))&&(!solo||stat(o).ab));
     if(Z)a.sort((x,y)=>Z.rows.find(r=>r.c.id===x.c).m-Z.rows.find(r=>r.c.id===y.c).m);else a.sort((x,y)=>x.e.localeCompare(y.e)||x.c.localeCompare(y.c));
     $("#tbl").innerHTML=a.length?`<table><thead><tr><th>Empresa</th><th>Centro</th><th>Jornada</th><th>Salario</th><th>Pedidos</th></tr></thead><tbody>`+a.map(o=>{const c=centro(o.c),s=stat(o),r=Z&&Z.rows.find(r=>r.c.id===o.c);
-      return`<tr class="r" data-o="${o.id}"><td data-l="Empresa">${eb(o.e)}<small>${esc(o.tipo)}</small></td><td data-l="Centro">${esc(c.loc)}<small>${c.id}${r?` · ${fm(r.m,r.e)} desde ${esc(Z.name)}`:""}</small></td><td data-l="Jornada">${esc(o.jornada)}</td><td data-l="Salario">${esc(o.salario.split("·")[0])}</td><td data-l="Pedidos">${badge(o)}${s.prox?`<small>Próxima incorporación: ${fd(s.prox)}</small>`:""}</td></tr>`}).join("")+"</tbody></table>":'<div class="empty">No hay ofertas con ese filtro.</div>';
+      return`<tr class="r ${s.ab?"live":""}" data-o="${o.id}"><td data-l="Empresa">${eb(o.e)}<small>${esc(o.tipo)}</small></td><td data-l="Centro">${esc(c.loc)}<small>${c.id}${r?` · ${fm(r.m,r.e)} desde ${esc(Z.name)}`:""}</small></td><td data-l="Jornada">${hf?hlHTML(o,hf):`${esc(o.jornada)}<div>${hchips(o)}</div>`}</td><td data-l="Salario">${esc(o.salario.split("·")[0])}</td><td data-l="Pedidos">${badge(o)}${s.prox?`<small>Próxima incorporación: ${fd(s.prox)}</small>`:""}</td></tr>`}).join("")+"</tbody></table>":'<div class="empty">No hay ofertas con ese filtro.</div>';
   }else{
-    let a=PED.filter(p=>!isDone(p)&&(!em||p.e===em)&&(!q||norm([p.e,centro(p.c).loc,p.c,p.sem,p.nota].join(" ")).includes(q)));
+    let a=PED.filter(p=>!isDone(p)&&(!em||p.e===em)&&(!hf||hTags(OFERTAS.find(o=>o.c===p.c&&o.e===p.e)||{}).includes(hf))&&(!q||norm([p.e,centro(p.c).loc,p.c,p.sem,p.nota].join(" ")).includes(q)));
     a.sort((x,y)=>(x.inc||"9").localeCompare(y.inc||"9")||x.e.localeCompare(y.e));
     $("#tbl").innerHTML=a.length?`<table><thead><tr><th>Empresa</th><th>Centro</th><th>Pedido</th><th>Enviados</th><th>Incorporación</th></tr></thead><tbody>`+a.map(p=>{const c=centro(p.c),pct=p.need?Math.min(100,Math.round((p.env||0)/p.need*100)):0;
-      return`<tr class="r" data-o="${p.c}-${p.e}"><td data-l="Empresa">${eb(p.e)}</td><td data-l="Centro">${esc(c.loc)}<small>${c.id}</small></td><td data-l="Pedido">${esc(p.sem)}${p.tipo==="Andarín"?" · andarines":""}<small>${esc(p.nota)}</small></td><td data-l="Enviados"><b>${p.env||0}</b>${p.need!=null?` / ${p.need}`:" (sin cifra)"}${p.need?`<div class="bar"><i style="width:${pct}%"></i></div>`:""}</td><td data-l="Incorporación">${p.inc?fd(p.inc):"—"}</td></tr>`}).join("")+"</tbody></table>":'<div class="empty">No hay pedidos abiertos con ese filtro.</div>';
+      return`<tr class="r live" data-o="${p.c}-${p.e}"><td data-l="Empresa">${eb(p.e)}</td><td data-l="Centro">${esc(c.loc)}<small>${c.id}</small></td><td data-l="Pedido">${esc(p.sem)}${p.tipo==="Andarín"?" · andarines":""}<small>${esc(p.nota)}</small>${hf?hlHTML(OFERTAS.find(o=>o.c===p.c&&o.e===p.e)||{},hf):""}</td><td data-l="Enviados"><b>${p.env||0}</b>${p.need!=null?` / ${p.need}`:" (sin cifra)"}${p.need?`<div class="bar"><i style="width:${pct}%"></i></div>`:""}</td><td data-l="Incorporación">${p.inc?fd(p.inc):"—"}</td></tr>`}).join("")+"</tbody></table>":'<div class="empty">No hay pedidos abiertos con ese filtro.</div>';
   }}
 $("#tbl").onclick=e=>{const r=e.target.closest("[data-o]");if(r)abre(r.dataset.o)};
-["tq","te","tab"].forEach(i=>$("#"+i).addEventListener("input",pintaTodas));
+["tq","te","th","tab"].forEach(i=>$("#"+i).addEventListener("input",pintaTodas));
 $("#te").innerHTML+=[...new Set(OFERTAS.map(o=>o.e))].map(e=>`<option>${e}</option>`).join("");
 $("#tmode").onclick=e=>{const b=e.target.closest("button");if(!b)return;tmode=b.dataset.m;[...$("#tmode").children].forEach(x=>x.classList.toggle("on",x===b));$("#tab").parentElement.style.display=tmode==="of"?"":"none";pintaTodas()};
 function refresca(){if(Z)pintaZona();pintaOfertas();pintaTodas();if(ADMIN)pintaAdmin()}
